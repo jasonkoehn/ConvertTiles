@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ConvertTilesApp: App {
+    @AppStorage("ColorScheme") var colorScheme: String = "system"
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView()
+                .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
         }
     }
 }

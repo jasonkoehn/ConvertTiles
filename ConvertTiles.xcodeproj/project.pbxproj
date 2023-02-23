@@ -8,18 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EB94299D848A000026A4 /* ConvertTilesApp.swift */; };
-		8739EB97299D848A000026A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EB96299D848A000026A4 /* ContentView.swift */; };
 		8739EB99299D848B000026A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8739EB98299D848B000026A4 /* Assets.xcassets */; };
 		8739EB9D299D848B000026A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8739EB9C299D848B000026A4 /* Preview Assets.xcassets */; };
+		8739EBA4299D8D85000026A4 /* ReorderableForEach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */; };
+		8739EBA6299D8DB2000026A4 /* StringToDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBA5299D8DB2000026A4 /* StringToDimension.swift */; };
+		8739EBA8299D8F2C000026A4 /* Structs&Funcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBA7299D8F2C000026A4 /* Structs&Funcs.swift */; };
+		8739EBAA299D91FE000026A4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBA9299D91FE000026A4 /* SettingsView.swift */; };
+		8739EBAC299DAC3C000026A4 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBAB299DAC3C000026A4 /* AppView.swift */; };
+		8739EBAE299DACC0000026A4 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBAD299DACC0000026A4 /* TileView.swift */; };
+		8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBAF299DACD0000026A4 /* AddConverterView.swift */; };
+		8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB1299DACDE000026A4 /* EditConverterView.swift */; };
+		8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */; };
+		87F256AC299E9A5900923713 /* TilePreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F256AB299E9A5900923713 /* TilePreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8739EB91299D848A000026A4 /* ConvertTiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConvertTiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8739EB94299D848A000026A4 /* ConvertTilesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTilesApp.swift; sourceTree = "<group>"; };
-		8739EB96299D848A000026A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8739EB98299D848B000026A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8739EB9A299D848B000026A4 /* ConvertTiles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConvertTiles.entitlements; sourceTree = "<group>"; };
 		8739EB9C299D848B000026A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableForEach.swift; sourceTree = "<group>"; };
+		8739EBA5299D8DB2000026A4 /* StringToDimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringToDimension.swift; sourceTree = "<group>"; };
+		8739EBA7299D8F2C000026A4 /* Structs&Funcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structs&Funcs.swift"; sourceTree = "<group>"; };
+		8739EBA9299D91FE000026A4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8739EBAB299DAC3C000026A4 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		8739EBAD299DACC0000026A4 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		8739EBAF299DACD0000026A4 /* AddConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConverterView.swift; sourceTree = "<group>"; };
+		8739EBB1299DACDE000026A4 /* EditConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditConverterView.swift; sourceTree = "<group>"; };
+		8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingGridView.swift; sourceTree = "<group>"; };
+		87F256AB299E9A5900923713 /* TilePreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilePreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +71,17 @@
 			isa = PBXGroup;
 			children = (
 				8739EB94299D848A000026A4 /* ConvertTilesApp.swift */,
-				8739EB96299D848A000026A4 /* ContentView.swift */,
+				8739EBAB299DAC3C000026A4 /* AppView.swift */,
+				8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */,
+				8739EBAD299DACC0000026A4 /* TileView.swift */,
+				8739EBAF299DACD0000026A4 /* AddConverterView.swift */,
+				8739EBB1299DACDE000026A4 /* EditConverterView.swift */,
+				87F256AB299E9A5900923713 /* TilePreView.swift */,
+				8739EBA9299D91FE000026A4 /* SettingsView.swift */,
+				8739EBA7299D8F2C000026A4 /* Structs&Funcs.swift */,
 				8739EB98299D848B000026A4 /* Assets.xcassets */,
+				8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */,
+				8739EBA5299D8DB2000026A4 /* StringToDimension.swift */,
 				8739EB9A299D848B000026A4 /* ConvertTiles.entitlements */,
 				8739EB9B299D848B000026A4 /* Preview Content */,
 			);
@@ -139,8 +166,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8739EB97299D848A000026A4 /* ContentView.swift in Sources */,
+				8739EBA8299D8F2C000026A4 /* Structs&Funcs.swift in Sources */,
+				8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */,
+				8739EBAE299DACC0000026A4 /* TileView.swift in Sources */,
 				8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */,
+				8739EBAC299DAC3C000026A4 /* AppView.swift in Sources */,
+				87F256AC299E9A5900923713 /* TilePreView.swift in Sources */,
+				8739EBAA299D91FE000026A4 /* SettingsView.swift in Sources */,
+				8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */,
+				8739EBA6299D8DB2000026A4 /* StringToDimension.swift in Sources */,
+				8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */,
+				8739EBA4299D8D85000026A4 /* ReorderableForEach.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
