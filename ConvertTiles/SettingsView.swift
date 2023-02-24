@@ -10,12 +10,12 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
     @Environment var autoColorScheme: ColorScheme
+    @Binding var haveAccentLines: Bool
     @Binding var accentColor: Color
     var body: some View {
         List {
-            Section("Color Scheme?") {
+            Section("Color Scheme") {
                 Picker("", selection: $colorScheme) {
                     Text("System").tag("system")
                     Text("Light").tag("light")
@@ -31,6 +31,9 @@ struct SettingsView: View {
                 Toggle(isOn: $haveAccentLines) {
                     Text("Tile Accent Lines?")
                 }
+            }
+            Section {
+                
             }
         }
         .navigationTitle("Settings")

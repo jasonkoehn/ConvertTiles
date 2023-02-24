@@ -11,7 +11,7 @@ struct EditConverterView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var converters: [Converter]
     var accentColor: Color
-    @State var haveAccentLines: Bool = UserDefaults.standard.bool(forKey: "haveAccentLines")
+    @State var haveAccentLines: Bool
     @State var id: UUID
     @State var name: String
     @State var units: [String]

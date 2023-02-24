@@ -11,7 +11,7 @@ struct AddConverterView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var converters: [Converter]
     var accentColor: Color = decodeUDColor(key: "accentColor")
-    @State var haveAccentLines: Bool = UserDefaults.standard.bool(forKey: "haveAccentLines")
+    @State var haveAccentLines: Bool
     @State var group: String = ""
     @State var name: String = ""
     @State var units: [String] = []
@@ -19,7 +19,7 @@ struct AddConverterView: View {
     @State var outUnit: String = ""
     @State var singleUnits: Bool = false
     @State var hasCustomColor: Bool = false
-    @State var hasAccentLine: Bool = UserDefaults.standard.bool(forKey: "haveAccentLines")
+    @State var hasAccentLine: Bool
     @State var hasCustomAccentLineColor: Bool = false
     @State var customColor: Color = decodeUDColor(key: "accentColor")
     @State var customAccentLineColor: Color = decodeUDColor(key: "accentColor")

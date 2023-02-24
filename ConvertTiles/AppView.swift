@@ -17,7 +17,7 @@ struct AppView: View {
     @State var isEditing: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollingGridView(converters: $converters, accentColor: accentColor, isEditing: $isEditing)
+            ScrollingGridView(converters: $converters, accentColor: accentColor, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                 .navigationTitle("Converters")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -48,12 +48,12 @@ struct AppView: View {
                 }
                 .sheet(isPresented: $showAddConverterView) {
                     NavigationStack {
-                        AddConverterView(converters: $converters)
+                        AddConverterView(converters: $converters, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
                     }
                 }
                 .sheet(isPresented: $showSettingsView) {
                     NavigationStack {
-                        SettingsView(autoColorScheme: _colorScheme, accentColor: $accentColor)
+                        SettingsView(autoColorScheme: _colorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
                     }
                 }
         }
