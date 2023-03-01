@@ -10,6 +10,7 @@ import Glassfy
 
 struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
+    @Environment(\.scenePhase) var scenePhase
     @AppStorage("ColorScheme") var colorScheme: String = "system"
     @AppStorage("fullAccess") var fullAccess: Bool = false
     @State var converters: [Converter] = []
@@ -20,7 +21,7 @@ struct AppView: View {
     @State var isEditing: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollingGridView(converters: $converters, fullAccess: $fullAccess, accentColor: accentColor, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
+            ScrollingGridView(converters: $converters, fullAccess: $fullAccess, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                 .navigationTitle("Converters")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -43,7 +44,15 @@ struct AppView: View {
                             }
                         }
                         Button(action: {
-                            showAddConverterView.toggle()
+                            if fullAccess {
+                                showAddConverterView.toggle()
+                            } else {
+                                if converters.count < 4 {
+                                    showAddConverterView.toggle()
+                                } else {
+                                    // go to buy sheet
+                                }
+                            }
                         }) {
                             Image(systemName: "plus")
                         }

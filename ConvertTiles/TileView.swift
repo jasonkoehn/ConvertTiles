@@ -21,6 +21,7 @@ struct TileView: View {
     var hasCustomAccentLineColor: Bool
     var customColor: Color
     var customAccentLineColor: Color
+    @Environment var scenePhase: ScenePhase
     @State var isEditing: Bool
     @FocusState var isInputActive: Bool
     @State var initialValue: Double = 1
@@ -109,14 +110,18 @@ struct TileView: View {
         }
         .background(hasAccentLine ? (hasCustomAccentLineColor ? customAccentLineColor.opacity(isEditing ? 0.5 : 1.0) : (hasCustomColor ? customColor.opacity(isEditing ? 0.5 : 1.0) : accentColor.opacity(isEditing ? 0.5 : 1.0))) : Color(.systemGray5))
         .cornerRadius(10)
-        .onChange(of: inUnit) { _ in
-            if let idx = converters.firstIndex(where: {$0.id == id}) {
-                converters[idx].inUnit = inUnit
+        .onChange(of: scenePhase) { phase in
+            if phase == .background {
+                if let idx = converters.firstIndex(where: {$0.id == id}) {
+                    converters[idx].inUnit = inUnit
+                }
             }
         }
-        .onChange(of: outUnit) { _ in
-            if let idx = converters.firstIndex(where: {$0.id == id}) {
-                converters[idx].outUnit = outUnit
+        .onChange(of: scenePhase) { phase in
+            if phase == .background {
+                if let idx = converters.firstIndex(where: {$0.id == id}) {
+                    converters[idx].outUnit = outUnit
+                }
             }
         }
     }

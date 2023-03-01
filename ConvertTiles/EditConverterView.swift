@@ -34,7 +34,7 @@ struct EditConverterView: View {
                 }
                 Toggle("Custom Color?", isOn: $hasCustomColor)
                     .onChange(of: hasCustomColor) { hcc in
-                        if !hcc {
+                        if hcc {
                             customColor = accentColor
                         }
                     }

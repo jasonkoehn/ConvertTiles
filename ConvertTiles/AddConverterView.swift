@@ -160,7 +160,7 @@ struct AddConverterView: View {
                         converters.append(Converter(id: UUID(), name: name, units: units, inUnit: inUnit, outUnit: outUnit, singleUnits: false, hasCustomColor: false, hasAccentLine: false, hasCustomAccentLineColor: false, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
                         dismiss()
                     }) {
-                        Text("Save")
+                        Text("Add")
                     }
                 } else {
                     Button(action: {
@@ -174,7 +174,7 @@ struct AddConverterView: View {
                     converters.append(Converter(id: UUID(), name: name, units: hasCustomUnits ? customUnits : units, inUnit: inUnit, outUnit: outUnit, singleUnits: singleUnits, hasCustomColor: hasCustomColor, hasAccentLine: hasAccentLine, hasCustomAccentLineColor: hasCustomAccentLineColor, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
                     dismiss()
                 }) {
-                    Text("Save")
+                    Text("Add")
                 }
             }
         }

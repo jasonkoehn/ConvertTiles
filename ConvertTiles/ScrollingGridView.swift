@@ -12,6 +12,7 @@ struct ScrollingGridView: View {
     @Binding var converters: [Converter]
     @Binding var fullAccess: Bool
     var accentColor: Color
+    @Environment var scenePhase: ScenePhase
     @Binding var isEditing: Bool
     @Binding var haveAccentLines: Bool
     @State var showAlert: Bool = false
@@ -22,7 +23,7 @@ struct ScrollingGridView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 335))]) {
                 ReorderableForEach($converters, allowReordering: $isEditing) { converter, isDragged in
                     ZStack {
-                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: fullAccess ? converter.hasCustomColor : false, hasAccentLine: fullAccess ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), isEditing: isEditing, isInputActive: _isInputActive)
+                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: fullAccess ? converter.hasCustomColor : false, hasAccentLine: fullAccess ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing, isInputActive: _isInputActive)
                         if isEditing {
                             withAnimation(.easeInOut(duration: 5.0)) {
                                 HStack {
