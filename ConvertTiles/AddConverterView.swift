@@ -10,6 +10,7 @@ import SwiftUI
 struct AddConverterView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var converters: [Converter]
+    @State var fullAccess: Bool
     var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var haveAccentLines: Bool
     @State var group: String = ""
@@ -27,54 +28,70 @@ struct AddConverterView: View {
     @State var customUnits: [String] = []
     var body: some View {
         VStack {
-            if group != "" {
-                TilePreView(accentColor: accentColor, name: name, units: hasCustomUnits ? customUnits : units, inUnit: $inUnit, outUnit: $outUnit, singleUnits: singleUnits, hasCustomColor: hasCustomColor, hasAccentLine: haveAccentLines ? hasAccentLine : false, customColor: customColor, customAccentLineColor: customAccentLineColor)
-            }
-            List {
-                NavigationLink(destination: GroupPicker(name: $name, group: $group, units: $units, inUnit: $inUnit, outUnit: $outUnit)) {
-                    HStack {
-                        Text("Group:")
-                        Spacer()
-                        if group != "" {
-                            Text(group)
-                                .foregroundColor(.blue)
-                        } else {
-                            Text("Choose a group to get started.")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
+            if fullAccess {
+                // Full Access
                 if group != "" {
-                    HStack {
-                        Text("Name:")
-                        TextField("", text: $name)
-                            .textFieldStyle(.roundedBorder)
-                    }
-                    Picker("", selection: $singleUnits) {
-                        Text("All Units").tag(false)
-                        Text("Single Units").tag(true)
-                    }
-                    .pickerStyle(.segmented)
-                    if singleUnits {
-                        Picker("In Unit:", selection: $inUnit) {
-                            ForEach(units, id: \.self) { unit in
-                                Text(unit).tag(unit)
+                    TilePreView(accentColor: accentColor, name: name, units: hasCustomUnits ? customUnits : units, inUnit: $inUnit, outUnit: $outUnit, singleUnits: singleUnits, hasCustomColor: hasCustomColor, hasAccentLine: haveAccentLines ? hasAccentLine : false, customColor: customColor, customAccentLineColor: customAccentLineColor)
+                }
+                List {
+                    NavigationLink(destination: GroupPicker(name: $name, group: $group, units: $units, inUnit: $inUnit, outUnit: $outUnit)) {
+                        HStack {
+                            Text("Group:")
+                            Spacer()
+                            if group != "" {
+                                Text(group)
+                                    .foregroundColor(.blue)
+                            } else {
+                                Text("Choose a group to get started.")
+                                    .foregroundColor(.blue)
                             }
                         }
-                        .pickerStyle(.menu)
-                        Picker("Out Unit:", selection: $outUnit) {
-                            ForEach(units, id: \.self) { unit in
-                                Text(unit).tag(unit)
-                            }
+                    }
+                    if group != "" {
+                        HStack {
+                            Text("Name:")
+                            TextField("", text: $name)
+                                .textFieldStyle(.roundedBorder)
                         }
-                        .pickerStyle(.menu)
-                    } else {
-                        Toggle("Custom Units?", isOn: $hasCustomUnits)
-                        if hasCustomUnits {
-                            NavigationLink(destination: CustomUnitsPicker(units: units, customUnits: $customUnits, inUnit: $inUnit, outUnit: $outUnit)) {
-                                Text("Custom Units:")
+                        Picker("", selection: $singleUnits) {
+                            Text("All Units").tag(false)
+                            Text("Single Units").tag(true)
+                        }
+                        .pickerStyle(.segmented)
+                        if singleUnits {
+                            Picker("In Unit:", selection: $inUnit) {
+                                ForEach(units, id: \.self) { unit in
+                                    Text(unit).tag(unit)
+                                }
                             }
-                            if customUnits != [] {
+                            .pickerStyle(.menu)
+                            Picker("Out Unit:", selection: $outUnit) {
+                                ForEach(units, id: \.self) { unit in
+                                    Text(unit).tag(unit)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        } else {
+                            Toggle("Custom Units?", isOn: $hasCustomUnits)
+                            if hasCustomUnits {
+                                NavigationLink(destination: CustomUnitsPicker(units: units, customUnits: $customUnits, inUnit: $inUnit, outUnit: $outUnit)) {
+                                    Text("Custom Units:")
+                                }
+                                if customUnits != [] {
+                                    Picker("Initial In Unit:", selection: $inUnit) {
+                                        ForEach(units, id: \.self) { unit in
+                                            Text(unit).tag(unit)
+                                        }
+                                    }
+                                    .pickerStyle(.menu)
+                                    Picker("Initial Out Unit:", selection: $outUnit) {
+                                        ForEach(units, id: \.self) { unit in
+                                            Text(unit).tag(unit)
+                                        }
+                                    }
+                                    .pickerStyle(.menu)
+                                }
+                            } else {
                                 Picker("Initial In Unit:", selection: $inUnit) {
                                     ForEach(units, id: \.self) { unit in
                                         Text(unit).tag(unit)
@@ -88,70 +105,69 @@ struct AddConverterView: View {
                                 }
                                 .pickerStyle(.menu)
                             }
-                        } else {
-                            Picker("Initial In Unit:", selection: $inUnit) {
-                                ForEach(units, id: \.self) { unit in
-                                    Text(unit).tag(unit)
+                        }
+                        Toggle("Custom Color?", isOn: $hasCustomColor)
+                            .onChange(of: hasCustomColor) { hcc in
+                                if !hcc {
+                                    customColor = accentColor
                                 }
                             }
-                            .pickerStyle(.menu)
-                            Picker("Initial Out Unit:", selection: $outUnit) {
-                                ForEach(units, id: \.self) { unit in
-                                    Text(unit).tag(unit)
+                        if hasCustomColor {
+                            ColorPicker("Custom Color:", selection: $customColor)
+                                .onChange(of: customColor) { _ in
+                                    if !hasCustomAccentLineColor {
+                                        customAccentLineColor = customColor
+                                    }
                                 }
-                            }
-                            .pickerStyle(.menu)
                         }
-                    }
-                    Toggle("Custom Color?", isOn: $hasCustomColor)
-                        .onChange(of: hasCustomColor) { hcc in
-                            if !hcc {
-                                customColor = accentColor
-                            }
-                        }
-                    if hasCustomColor {
-                        ColorPicker("Custom Color:", selection: $customColor)
-                            .onChange(of: customColor) { _ in
-                                if !hasCustomAccentLineColor {
+                        Toggle("Accent Line?", isOn: $hasAccentLine)
+                            .onChange(of: hasAccentLine) { hal in
+                                if !hal {
                                     customAccentLineColor = customColor
+                                    hasCustomAccentLineColor = false
                                 }
                             }
-                    }
-                    Toggle("Accent Line?", isOn: $hasAccentLine)
-                        .onChange(of: hasAccentLine) { hal in
-                            if !hal {
-                                customAccentLineColor = customColor
-                                hasCustomAccentLineColor = false
-                            }
-                        }
-                    if hasAccentLine {
-                        Toggle("Custom Accent Line Color?", isOn: $hasCustomAccentLineColor)
-                            .onChange(of: hasCustomAccentLineColor) { hcal in
-                                if !hcal {
-                                    customAccentLineColor = customColor
+                        if hasAccentLine {
+                            Toggle("Custom Accent Line Color?", isOn: $hasCustomAccentLineColor)
+                                .onChange(of: hasCustomAccentLineColor) { hcal in
+                                    if !hcal {
+                                        customAccentLineColor = customColor
+                                    }
                                 }
+                            if hasCustomAccentLineColor {
+                                ColorPicker("Custom Accent Line Color:", selection: $customAccentLineColor)
                             }
-                        if hasCustomAccentLineColor {
-                            ColorPicker("Custom Accent Line Color:", selection: $customAccentLineColor)
                         }
-                    }
-                    if !haveAccentLines && hasAccentLine {
-                        Text("Accent line will not show unless it is turned on in settings.")
-                            .foregroundColor(.secondary)
-                            .font(.system(size: 13))
-                            .listRowSeparator(.hidden, edges: .bottom)
+                        if !haveAccentLines && hasAccentLine {
+                            Text("Accent line will not show unless it is turned on in settings.")
+                                .foregroundColor(.secondary)
+                                .font(.system(size: 13))
+                                .listRowSeparator(.hidden, edges: .bottom)
+                        }
                     }
                 }
+                .listStyle(.inset)
+            } else {
+                // Basic Access
+                BasicGroupPicker(name: $name, units: $units, inUnit: $inUnit, outUnit: $outUnit)
             }
-            .listStyle(.inset)
         }
         .navigationTitle("Add Converter")
         .toolbar {
             if group == "" {
-                Button(action: {
-                    dismiss()
-                }) {
-                    Text("Cancel")
+                if !fullAccess && name != "" {
+                    Button(action: {
+                        converters.append(Converter(id: UUID(), name: name, units: units, inUnit: inUnit, outUnit: outUnit, singleUnits: false, hasCustomColor: false, hasAccentLine: false, hasCustomAccentLineColor: false, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
+                        dismiss()
+                    }) {
+                        Text("Save")
+                    }
+                } else {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                    }
                 }
             } else {
                 Button(action: {
@@ -232,5 +248,41 @@ struct CustomUnitsPicker: View {
             inUnit = customUnits.first ?? ""
             outUnit = customUnits.first ?? ""
         }
+    }
+}
+
+struct BasicGroupPicker: View {
+    struct BasicConverterList {
+        var name: String
+        var units: [String]
+        var inUnit: String
+        var outUnit: String
+    }
+    var convertersList: [BasicConverterList] = [BasicConverterList(name: "Area", units: ["Square Kilometers", "Square Meters", "Square Centimeters", "Square Millimeters", "Square Inches", "Square Feet", "Square Yards", "Square Miles", "Acres", "Hectares"], inUnit: "Square Meters", outUnit: "Square Feet"), BasicConverterList(name: "Length", units: ["Kilometers", "Meters", "Decimeters", "Centimeters", "Millimeters", "Inches", "Feet", "Yards", "Miles", "Nautical Miles"], inUnit: "Meters", outUnit: "Feet"), BasicConverterList(name: "Mass", units: ["Kilograms", "Grams", "Centigrams", "Milligrams", "Ounces", "Pounds", "MetricTons", "ShortTons"], inUnit: "Kilograms", outUnit: "Pounds"), BasicConverterList(name: "Speed", units: ["Meters Per Second", "Kilometers Per Hour", "Miles Per Hour", "Knots"], inUnit: "Miles Per Hour", outUnit: "Kilometers Per Hour"), BasicConverterList(name: "Temperature", units: ["Kelvin", "Celsius", "Fahrenheit"], inUnit: "Celsius", outUnit: "Fahrenheit"), BasicConverterList(name: "Volume", units: ["Megaliters", "Liters", "Milliliters", "Cubic Meters", "Cubic Millimeters", "Cubic Inches", "Cubic Feet", "Cubic Yards", "Acre Feet", "Bushels", "Teaspoons", "Tablespoons", "Fluid Ounces", "Cups", "Pints", "Quarts", "Gallons", "Imperial Teaspoons", "Imperial Tablespoons", "Imperial Fluid Ounces", "Imperial Pints", "Imperial Quarts", "Imperial Gallons", "Metric Cups"], inUnit: "Liters", outUnit: "Quarts")]
+    @Binding var name: String
+    @Binding var units: [String]
+    @Binding var inUnit: String
+    @Binding var outUnit: String
+    var body: some View {
+        List {
+            ForEach(convertersList, id: \.name) { converter in
+                Button(action: {
+                    name = converter.name
+                    units = converter.units
+                    inUnit = converter.inUnit
+                    outUnit = converter.outUnit
+                }) {
+                    HStack {
+                        Text(converter.name)
+                            .foregroundColor(.primary)
+                        if name == converter.name {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        }
+        .listStyle(.inset)
     }
 }

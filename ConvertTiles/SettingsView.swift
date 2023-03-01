@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("ColorScheme") var colorScheme: String = "system"
+    @AppStorage("fullAccess") var fullAccess: Bool = false
+    @AppStorage("basicColor") var basicColor: String = "blue"
     @Environment var autoColorScheme: ColorScheme
     @Binding var haveAccentLines: Bool
     @Binding var accentColor: Color
@@ -23,17 +25,51 @@ struct SettingsView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            Section {
-                ColorPicker("Tile Accent Color:", selection: $accentColor)
-                    .onChange(of: accentColor) { _ in
-                        UserDefaults.standard.set(encodeColor(color: accentColor), forKey: "accentColor")
+            Section("Tile Accent Color") {
+                if fullAccess {
+                    ColorPicker("Tile Accent Color:", selection: $accentColor)
+                    Toggle(isOn: $haveAccentLines) {
+                        Text("Tile Accent Lines?")
                     }
-                Toggle(isOn: $haveAccentLines) {
-                    Text("Tile Accent Lines?")
+                } else {
+                    Picker("", selection: $basicColor) {
+                        Text("Red").tag("red")
+                        Text("Green").tag("green")
+                        Text("Blue").tag("blue")
+                        Text("Black").tag("black")
+                        Text("White").tag("white")
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: basicColor) { color in
+                        switch color {
+                        case "red":
+                            accentColor = .red
+                        case "green":
+                            accentColor = .green
+                        case "blue":
+                            accentColor = .blue
+                        case "black":
+                            accentColor = .black
+                        case "white":
+                            accentColor = .white
+                        default:
+                            accentColor = .blue
+                        }
+                    }
                 }
             }
+            .onChange(of: accentColor) { _ in
+                UserDefaults.standard.set(encodeColor(color: accentColor), forKey: "accentColor")
+            }
+            
+            //Debug
             Section {
-                
+                Toggle("Full Access", isOn: $fullAccess)
+                    .onChange(of: fullAccess) { access in
+                        if !access {
+                            accentColor = Color.blue
+                        }
+                    }
             }
         }
         .navigationTitle("Settings")

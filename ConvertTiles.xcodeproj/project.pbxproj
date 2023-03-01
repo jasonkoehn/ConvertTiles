@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		872B0D1E29AFBBD6003B3D8D /* AppIconSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */; };
 		8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EB94299D848A000026A4 /* ConvertTilesApp.swift */; };
 		8739EB99299D848B000026A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8739EB98299D848B000026A4 /* Assets.xcassets */; };
 		8739EB9D299D848B000026A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8739EB9C299D848B000026A4 /* Preview Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSwift.swift; sourceTree = "<group>"; };
 		872E36DF29A832600091FD00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8739EB91299D848A000026A4 /* ConvertTiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConvertTiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8739EB94299D848A000026A4 /* ConvertTilesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTilesApp.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				8739EB98299D848B000026A4 /* Assets.xcassets */,
 				8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */,
 				8739EBA5299D8DB2000026A4 /* StringToDimension.swift */,
+				872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */,
 				8739EB9A299D848B000026A4 /* ConvertTiles.entitlements */,
 				872E36DF29A832600091FD00 /* Info.plist */,
 				8739EB9B299D848B000026A4 /* Preview Content */,
@@ -184,6 +187,7 @@
 				87F256AC299E9A5900923713 /* TilePreView.swift in Sources */,
 				8739EBAA299D91FE000026A4 /* SettingsView.swift in Sources */,
 				8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */,
+				872B0D1E29AFBBD6003B3D8D /* AppIconSwift.swift in Sources */,
 				8739EBA6299D8DB2000026A4 /* StringToDimension.swift in Sources */,
 				8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */,
 				8739EBA4299D8D85000026A4 /* ReorderableForEach.swift in Sources */,
@@ -309,13 +313,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ConvertTiles/ConvertTiles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 01032023;
 				DEVELOPMENT_ASSET_PATHS = "\"ConvertTiles/Preview Content\"";
 				DEVELOPMENT_TEAM = 33MAXP8MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ConvertTiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ConvertTiles;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -329,11 +334,11 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonkoehn.ConvertTiles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -353,13 +358,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ConvertTiles/ConvertTiles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 01032023;
 				DEVELOPMENT_ASSET_PATHS = "\"ConvertTiles/Preview Content\"";
 				DEVELOPMENT_TEAM = 33MAXP8MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ConvertTiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ConvertTiles;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -373,11 +379,11 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonkoehn.ConvertTiles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

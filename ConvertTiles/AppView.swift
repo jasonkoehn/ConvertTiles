@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import Glassfy
 
 struct AppView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) var autoColorScheme
+    @AppStorage("ColorScheme") var colorScheme: String = "system"
+    @AppStorage("fullAccess") var fullAccess: Bool = false
     @State var converters: [Converter] = []
     @State var showAddConverterView: Bool = false
     @State var showSettingsView: Bool = false
@@ -17,7 +20,7 @@ struct AppView: View {
     @State var isEditing: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollingGridView(converters: $converters, accentColor: accentColor, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
+            ScrollingGridView(converters: $converters, fullAccess: $fullAccess, accentColor: accentColor, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                 .navigationTitle("Converters")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -48,14 +51,18 @@ struct AppView: View {
                 }
                 .sheet(isPresented: $showAddConverterView) {
                     NavigationStack {
-                        AddConverterView(converters: $converters, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
+                        AddConverterView(converters: $converters, fullAccess: fullAccess, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
                     }
                 }
                 .sheet(isPresented: $showSettingsView) {
                     NavigationStack {
-                        SettingsView(autoColorScheme: _colorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
+                        SettingsView(autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
                     }
                 }
+        }
+        .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
+        .onAppear() {
+            Glassfy.initialize(apiKey: "d1e8f91c6187461fb8c6db217124ff84", watcherMode: false)
         }
         .task {
             let manager = FileManager.default

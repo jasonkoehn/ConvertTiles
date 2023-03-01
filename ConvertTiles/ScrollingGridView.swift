@@ -10,6 +10,7 @@ import SwiftUI
 struct ScrollingGridView: View {
     @FocusState var isInputActive: Bool
     @Binding var converters: [Converter]
+    @Binding var fullAccess: Bool
     var accentColor: Color
     @Binding var isEditing: Bool
     @Binding var haveAccentLines: Bool
@@ -21,22 +22,24 @@ struct ScrollingGridView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 335))]) {
                 ReorderableForEach($converters, allowReordering: $isEditing) { converter, isDragged in
                     ZStack {
-                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: converter.hasCustomColor, hasAccentLine: haveAccentLines ? converter.hasAccentLine : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), isEditing: isEditing, isInputActive: _isInputActive)
+                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: fullAccess ? converter.hasCustomColor : false, hasAccentLine: fullAccess ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), isEditing: isEditing, isInputActive: _isInputActive)
                         if isEditing {
                             withAnimation(.easeInOut(duration: 5.0)) {
                                 HStack {
-                                    Button(action: {
-                                        selectedConverter = Converter(id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: converter.hasCustomColor, hasAccentLine: converter.hasAccentLine, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: converter.customColor, customAccentLineColor: converter.customAccentLineColor)
-                                    }) {
-                                        Text("Edit")
-                                            .foregroundColor(.blue)
-                                            .font(.system(size: 22))
-                                            .frame(width: 60, height: 60)
-                                            .background(.black)
-                                            .cornerRadius(15)
-                                            .padding(.vertical, 8)
-                                            .padding(.leading, 8)
-                                            .padding(.trailing, 2)
+                                    if fullAccess {
+                                        Button(action: {
+                                            selectedConverter = Converter(id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: converter.hasCustomColor, hasAccentLine: converter.hasAccentLine, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: converter.customColor, customAccentLineColor: converter.customAccentLineColor)
+                                        }) {
+                                            Text("Edit")
+                                                .foregroundColor(.blue)
+                                                .font(.system(size: 22))
+                                                .frame(width: 60, height: 60)
+                                                .background(.black)
+                                                .cornerRadius(15)
+                                                .padding(.vertical, 8)
+                                                .padding(.leading, 8)
+                                                .padding(.trailing, 2)
+                                        }
                                     }
                                     Button(role: .destructive ,action: {
                                         deleteId = converter.id
@@ -49,7 +52,7 @@ struct ScrollingGridView: View {
                                             .background(.black)
                                             .cornerRadius(15)
                                             .padding(.vertical, 8)
-                                            .padding(.leading, 2)
+                                            .padding(.leading, fullAccess ? 2 : 8)
                                             .padding(.trailing, 8)
                                     }
                                 }
