@@ -20,7 +20,7 @@
 		8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBAF299DACD0000026A4 /* AddConverterView.swift */; };
 		8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB1299DACDE000026A4 /* EditConverterView.swift */; };
 		8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */; };
-		87510A1729A92B3400CBA9F7 /* Glassfy in Frameworks */ = {isa = PBXBuildFile; productRef = 87510A1629A92B3400CBA9F7 /* Glassfy */; };
+		87E1601F29B6B8BE00B8BEC7 /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = 87E1601E29B6B8BE00B8BEC7 /* Adapty */; };
 		87F256AC299E9A5900923713 /* TilePreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F256AB299E9A5900923713 /* TilePreView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87510A1729A92B3400CBA9F7 /* Glassfy in Frameworks */,
+				87E1601F29B6B8BE00B8BEC7 /* Adapty in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			);
 			name = ConvertTiles;
 			packageProductDependencies = (
-				87510A1629A92B3400CBA9F7 /* Glassfy */,
+				87E1601E29B6B8BE00B8BEC7 /* Adapty */,
 			);
 			productName = ConvertTiles;
 			productReference = 8739EB91299D848A000026A4 /* ConvertTiles.app */;
@@ -151,7 +151,7 @@
 			);
 			mainGroup = 8739EB88299D848A000026A4;
 			packageReferences = (
-				87510A1529A92B3400CBA9F7 /* XCRemoteSwiftPackageReference "ios-sdk" */,
+				87E1601D29B6B8BE00B8BEC7 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
 			);
 			productRefGroup = 8739EB92299D848A000026A4 /* Products */;
 			projectDirPath = "";
@@ -420,21 +420,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		87510A1529A92B3400CBA9F7 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
+		87E1601D29B6B8BE00B8BEC7 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/glassfy/ios-sdk";
+			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		87510A1629A92B3400CBA9F7 /* Glassfy */ = {
+		87E1601E29B6B8BE00B8BEC7 /* Adapty */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 87510A1529A92B3400CBA9F7 /* XCRemoteSwiftPackageReference "ios-sdk" */;
-			productName = Glassfy;
+			package = 87E1601D29B6B8BE00B8BEC7 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = Adapty;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

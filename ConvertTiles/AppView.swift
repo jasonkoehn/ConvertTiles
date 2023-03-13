@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
-import Glassfy
 
 struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @AppStorage("fullAccess") var fullAccess: Bool = false
+    @State var pro: Bool = false
     @State var converters: [Converter] = []
     @State var showAddConverterView: Bool = false
     @State var showSettingsView: Bool = false
@@ -21,7 +20,7 @@ struct AppView: View {
     @State var isEditing: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollingGridView(converters: $converters, fullAccess: $fullAccess, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
+            ScrollingGridView(converters: $converters, pro: $pro, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                 .navigationTitle("Converters")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -44,7 +43,7 @@ struct AppView: View {
                             }
                         }
                         Button(action: {
-                            if fullAccess {
+                            if pro {
                                 showAddConverterView.toggle()
                             } else {
                                 if converters.count < 4 {
@@ -60,19 +59,16 @@ struct AppView: View {
                 }
                 .sheet(isPresented: $showAddConverterView) {
                     NavigationStack {
-                        AddConverterView(converters: $converters, fullAccess: fullAccess, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
+                        AddConverterView(converters: $converters, pro: pro, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
                     }
                 }
                 .sheet(isPresented: $showSettingsView) {
                     NavigationStack {
-                        SettingsView(autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
+                        SettingsView(pro: $pro, autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
                     }
                 }
         }
         .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
-        .onAppear() {
-            Glassfy.initialize(apiKey: "d1e8f91c6187461fb8c6db217124ff84", watcherMode: false)
-        }
         .task {
             let manager = FileManager.default
             let decoder = PropertyListDecoder()

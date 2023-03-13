@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @AppStorage("fullAccess") var fullAccess: Bool = false
+    @Binding var pro: Bool
     @AppStorage("basicColor") var basicColor: String = "blue"
     @Environment var autoColorScheme: ColorScheme
     @Binding var haveAccentLines: Bool
@@ -26,7 +26,7 @@ struct SettingsView: View {
                 .pickerStyle(.segmented)
             }
             Section("Tile Accent Color") {
-                if fullAccess {
+                if pro {
                     ColorPicker("Tile Accent Color:", selection: $accentColor)
                     Toggle(isOn: $haveAccentLines) {
                         Text("Tile Accent Lines?")
@@ -62,15 +62,6 @@ struct SettingsView: View {
                 UserDefaults.standard.set(encodeColor(color: accentColor), forKey: "accentColor")
             }
             
-            //Debug
-            Section {
-                Toggle("Full Access", isOn: $fullAccess)
-                    .onChange(of: fullAccess) { access in
-                        if !access {
-                            accentColor = Color.blue
-                        }
-                    }
-            }
         }
         .navigationTitle("Settings")
         .toolbar {
