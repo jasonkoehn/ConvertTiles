@@ -10,8 +10,8 @@ import SwiftUI
 struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var store: Store
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @State var pro: Bool = false
     @State var converters: [Converter] = []
     @State var showAddConverterView: Bool = false
     @State var showSettingsView: Bool = false
@@ -20,7 +20,7 @@ struct AppView: View {
     @State var isEditing: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollingGridView(converters: $converters, pro: $pro, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
+            ScrollingGridView(converters: $converters, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                 .navigationTitle("Converters")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -43,7 +43,7 @@ struct AppView: View {
                             }
                         }
                         Button(action: {
-                            if pro {
+                            if store.pro {
                                 showAddConverterView.toggle()
                             } else {
                                 if converters.count < 4 {
@@ -59,12 +59,12 @@ struct AppView: View {
                 }
                 .sheet(isPresented: $showAddConverterView) {
                     NavigationStack {
-                        AddConverterView(converters: $converters, pro: pro, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
+                        AddConverterView(converters: $converters, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
                     }
                 }
                 .sheet(isPresented: $showSettingsView) {
                     NavigationStack {
-                        SettingsView(pro: $pro, autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
+                        SettingsView(autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
                     }
                 }
         }
@@ -78,6 +78,9 @@ struct AppView: View {
                 if let response = try? decoder.decode([Converter].self, from: data) {
                     converters = response
                 }
+            }
+            if await AdaptyManager.shared.getAccessLevel() {
+                store.pro = true
             }
         }
         .onChange(of: converters) { _ in

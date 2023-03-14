@@ -20,6 +20,8 @@
 		8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBAF299DACD0000026A4 /* AddConverterView.swift */; };
 		8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB1299DACDE000026A4 /* EditConverterView.swift */; };
 		8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */; };
+		87DBB93B29BFD29A0071154E /* AdaptyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBB93A29BFD29A0071154E /* AdaptyManager.swift */; };
+		87DBB93D29BFD2B20071154E /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBB93C29BFD2B20071154E /* PaywallView.swift */; };
 		87E1601F29B6B8BE00B8BEC7 /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = 87E1601E29B6B8BE00B8BEC7 /* Adapty */; };
 		87F256AC299E9A5900923713 /* TilePreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F256AB299E9A5900923713 /* TilePreView.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +43,8 @@
 		8739EBAF299DACD0000026A4 /* AddConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConverterView.swift; sourceTree = "<group>"; };
 		8739EBB1299DACDE000026A4 /* EditConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditConverterView.swift; sourceTree = "<group>"; };
 		8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingGridView.swift; sourceTree = "<group>"; };
+		87DBB93A29BFD29A0071154E /* AdaptyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptyManager.swift; sourceTree = "<group>"; };
+		87DBB93C29BFD2B20071154E /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		87F256AB299E9A5900923713 /* TilePreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilePreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +87,9 @@
 				8739EBB1299DACDE000026A4 /* EditConverterView.swift */,
 				87F256AB299E9A5900923713 /* TilePreView.swift */,
 				8739EBA9299D91FE000026A4 /* SettingsView.swift */,
+				87DBB93C29BFD2B20071154E /* PaywallView.swift */,
 				8739EBA7299D8F2C000026A4 /* Structs&Funcs.swift */,
+				87DBB93A29BFD29A0071154E /* AdaptyManager.swift */,
 				8739EB98299D848B000026A4 /* Assets.xcassets */,
 				8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */,
 				8739EBA5299D8DB2000026A4 /* StringToDimension.swift */,
@@ -180,11 +186,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8739EBA8299D8F2C000026A4 /* Structs&Funcs.swift in Sources */,
+				87DBB93B29BFD29A0071154E /* AdaptyManager.swift in Sources */,
 				8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */,
 				8739EBAE299DACC0000026A4 /* TileView.swift in Sources */,
 				8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */,
 				8739EBAC299DAC3C000026A4 /* AppView.swift in Sources */,
 				87F256AC299E9A5900923713 /* TilePreView.swift in Sources */,
+				87DBB93D29BFD2B20071154E /* PaywallView.swift in Sources */,
 				8739EBAA299D91FE000026A4 /* SettingsView.swift in Sources */,
 				8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */,
 				872B0D1E29AFBBD6003B3D8D /* AppIconSwift.swift in Sources */,
@@ -313,7 +321,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ConvertTiles/ConvertTiles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 01032023;
+				CURRENT_PROJECT_VERSION = 13032023;
 				DEVELOPMENT_ASSET_PATHS = "\"ConvertTiles/Preview Content\"";
 				DEVELOPMENT_TEAM = 33MAXP8MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -358,7 +366,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ConvertTiles/ConvertTiles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 01032023;
+				CURRENT_PROJECT_VERSION = 13032023;
 				DEVELOPMENT_ASSET_PATHS = "\"ConvertTiles/Preview Content\"";
 				DEVELOPMENT_TEAM = 33MAXP8MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;

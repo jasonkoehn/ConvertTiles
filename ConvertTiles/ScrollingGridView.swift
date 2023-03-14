@@ -10,7 +10,7 @@ import SwiftUI
 struct ScrollingGridView: View {
     @FocusState var isInputActive: Bool
     @Binding var converters: [Converter]
-    @Binding var pro: Bool
+    @EnvironmentObject var store: Store
     var accentColor: Color
     @Environment var scenePhase: ScenePhase
     @Binding var isEditing: Bool
@@ -23,11 +23,11 @@ struct ScrollingGridView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 335))]) {
                 ReorderableForEach($converters, allowReordering: $isEditing) { converter, isDragged in
                     ZStack {
-                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: pro ? converter.hasCustomColor : false, hasAccentLine: pro ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing, isInputActive: _isInputActive)
+                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: store.pro ? converter.hasCustomColor : false, hasAccentLine: store.pro ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing, isInputActive: _isInputActive)
                         if isEditing {
                             withAnimation(.easeInOut(duration: 5.0)) {
                                 HStack {
-                                    if pro {
+                                    if store.pro {
                                         Button(action: {
                                             selectedConverter = Converter(id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: converter.hasCustomColor, hasAccentLine: converter.hasAccentLine, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: converter.customColor, customAccentLineColor: converter.customAccentLineColor)
                                         }) {
@@ -53,7 +53,7 @@ struct ScrollingGridView: View {
                                             .background(.black)
                                             .cornerRadius(15)
                                             .padding(.vertical, 8)
-                                            .padding(.leading, pro ? 2 : 8)
+                                            .padding(.leading, store.pro ? 2 : 8)
                                             .padding(.trailing, 8)
                                     }
                                 }

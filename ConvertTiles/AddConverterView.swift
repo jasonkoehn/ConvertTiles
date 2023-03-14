@@ -10,7 +10,7 @@ import SwiftUI
 struct AddConverterView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var converters: [Converter]
-    @State var pro: Bool
+    @EnvironmentObject var store: Store
     var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var haveAccentLines: Bool
     @State var group: String = ""
@@ -28,7 +28,7 @@ struct AddConverterView: View {
     @State var customUnits: [String] = []
     var body: some View {
         VStack {
-            if pro {
+            if store.pro {
                 // Full Access
                 if group != "" {
                     TilePreView(accentColor: accentColor, name: name, units: hasCustomUnits ? customUnits : units, inUnit: $inUnit, outUnit: $outUnit, singleUnits: singleUnits, hasCustomColor: hasCustomColor, hasAccentLine: haveAccentLines ? hasAccentLine : false, customColor: customColor, customAccentLineColor: customAccentLineColor)
@@ -155,7 +155,7 @@ struct AddConverterView: View {
         .navigationTitle("Add Converter")
         .toolbar {
             if group == "" {
-                if !pro && name != "" {
+                if store.pro && name != "" {
                     Button(action: {
                         converters.append(Converter(id: UUID(), name: name, units: units, inUnit: inUnit, outUnit: outUnit, singleUnits: false, hasCustomColor: false, hasAccentLine: false, hasCustomAccentLineColor: false, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
                         dismiss()

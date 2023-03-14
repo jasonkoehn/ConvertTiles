@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+class Store: ObservableObject {
+    @Published var pro: Bool = false
+}
+
 struct Converter: Codable, Identifiable, Hashable {
     var id: UUID
     var name: String

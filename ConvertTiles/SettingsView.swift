@@ -10,11 +10,12 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @Binding var pro: Bool
+    @EnvironmentObject var store: Store
     @AppStorage("basicColor") var basicColor: String = "blue"
     @Environment var autoColorScheme: ColorScheme
     @Binding var haveAccentLines: Bool
     @Binding var accentColor: Color
+    @State var showPaywallView: Bool = false
     var body: some View {
         List {
             Section("Color Scheme") {
@@ -26,7 +27,7 @@ struct SettingsView: View {
                 .pickerStyle(.segmented)
             }
             Section("Tile Accent Color") {
-                if pro {
+                if store.pro {
                     ColorPicker("Tile Accent Color:", selection: $accentColor)
                     Toggle(isOn: $haveAccentLines) {
                         Text("Tile Accent Lines?")
@@ -62,6 +63,14 @@ struct SettingsView: View {
                 UserDefaults.standard.set(encodeColor(color: accentColor), forKey: "accentColor")
             }
             
+            Section {
+                Button(action: {
+                    showPaywallView.toggle()
+                }) {
+                 Text("Buy Premium!")
+                }
+            }
+            
         }
         .navigationTitle("Settings")
         .toolbar {
@@ -73,5 +82,10 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(colorScheme == "system" ? autoColorScheme : (colorScheme == "dark" ? .dark : .light))
+        .fullScreenCover(isPresented: $showPaywallView) {
+            NavigationStack {
+                PaywallView()
+            }
+        }
     }
 }
