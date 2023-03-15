@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @EnvironmentObject var store: Store
+    @AppStorage("pro") var pro: Bool = false
     @AppStorage("basicColor") var basicColor: String = "blue"
     @Environment var autoColorScheme: ColorScheme
     @Binding var haveAccentLines: Bool
@@ -27,7 +27,7 @@ struct SettingsView: View {
                 .pickerStyle(.segmented)
             }
             Section("Tile Accent Color") {
-                if store.pro {
+                if pro {
                     ColorPicker("Tile Accent Color:", selection: $accentColor)
                     Toggle(isOn: $haveAccentLines) {
                         Text("Tile Accent Lines?")

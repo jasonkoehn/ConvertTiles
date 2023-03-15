@@ -10,7 +10,7 @@ import SwiftUI
 struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject var store: Store
+    @AppStorage("pro") var pro: Bool = false
     @AppStorage("ColorScheme") var colorScheme: String = "system"
     @State var converters: [Converter] = []
     @State var showAddConverterView: Bool = false
@@ -18,6 +18,7 @@ struct AppView: View {
     @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
     @State var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var isEditing: Bool = false
+    @State var showPaywallView: Bool = false
     var body: some View {
         NavigationStack {
             ScrollingGridView(converters: $converters, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
@@ -43,13 +44,13 @@ struct AppView: View {
                             }
                         }
                         Button(action: {
-                            if store.pro {
+                            if pro {
                                 showAddConverterView.toggle()
                             } else {
                                 if converters.count < 4 {
                                     showAddConverterView.toggle()
                                 } else {
-                                    // go to buy sheet
+                                    showPaywallView.toggle()
                                 }
                             }
                         }) {
@@ -67,6 +68,11 @@ struct AppView: View {
                         SettingsView(autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
                     }
                 }
+                .fullScreenCover(isPresented: $showPaywallView) {
+                    NavigationStack {
+                        PaywallView()
+                    }
+                }
         }
         .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
         .task {
@@ -80,11 +86,19 @@ struct AppView: View {
                 }
             }
             if await AdaptyManager.shared.getAccessLevel() {
-                store.pro = true
+                pro = true
+            } else {
+                pro = false
             }
         }
         .onChange(of: converters) { _ in
             saveArray(converters: converters)
         }
+    }
+}
+
+struct AppView_Previews: PreviewProvider {
+    static var previews: some View {
+        AppView()
     }
 }

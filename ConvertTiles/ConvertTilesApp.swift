@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct ConvertTilesApp: App {
-    @StateObject var store = Store()
     var body: some Scene {
         WindowGroup {
             AppView()
-                .environmentObject(store)
                 .onAppear {
                     AdaptyManager.shared.activate()
                 }
