@@ -73,6 +73,7 @@ struct PaywallView: View {
 
                 buttonSection
                     .padding(.vertical, 20)
+                informationSection
                 HStack {Spacer()}
 
             }
@@ -82,7 +83,7 @@ struct PaywallView: View {
         .overlay {
             if overlay {
                 ZStack {
-                    Color.black.opacity(0.6).ignoresSafeArea(.all)
+                    Color.black.opacity(0.5).ignoresSafeArea(.all)
                     ProgressView()
                 }
             }
@@ -118,6 +119,8 @@ struct PaywallView: View {
                     .foregroundColor(.teal)
                 Text("-ability to edit tiles")
                     .foregroundColor(.red)
+                Text("-light or dark mode options")
+                    .foregroundColor(.black)
                 Text("-more than four converters at a time")
                     .foregroundColor(.green)
                 Text("-infinite color options")
@@ -160,10 +163,12 @@ struct PaywallView: View {
                                 .font(.system(size: 20))
                             Spacer()
                         }
-                        Text("1 week free trial")
-                            .italic()
-                            .font(.system(size: 17))
-                            .foregroundColor(.white)
+                        if product.introductoryOfferEligibility == .eligible {
+                            Text("1 week free trial")
+                                .italic()
+                                .font(.system(size: 17))
+                                .foregroundColor(.white)
+                        }
                         Spacer()
                     }
                     .foregroundColor(.blue)
@@ -195,6 +200,21 @@ struct PaywallView: View {
     
     // MARK: Information Section
     var informationSection: some View {
-        Text("")
+        VStack(alignment: .leading, spacing: 5) {
+            Text("If canceled within trial period no charges are applied.")
+                .font(.system(size: 15))
+                .padding(.bottom, 5)
+                .fontDesign(.monospaced)
+            Group {
+                Text("Payment will be charged to Apple ID Account at confirmation of purchase.")
+                Text("Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period.")
+                Text("Account will be charged for renewal within 24-hours prior to the end of the current period, and identify the cost of the renewal.")
+                Text("Subscriptions may be managed by the user and auto renewal may be turned off by going to the user's Account Settings after purchase.")
+                Text("Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable.")
+            }
+            .font(.system(size: 10))
+        }
+        .frame(width: 310)
+        .foregroundColor(.white)
     }
 }

@@ -21,10 +21,8 @@ class AdaptyManager {
         do {
             let profileInfo = try await Adapty.getProfile()
             if profileInfo?.accessLevels[accessLevelKey]?.isActive == true {
-                print("has premium")
                 return true
             } else {
-                print("has basic")
                 return false
             }
         } catch {
@@ -64,7 +62,7 @@ class AdaptyManager {
     func getProducts() async -> [AdaptyPaywallProduct]? {
         do {
             guard let paywall = try await Adapty.getPaywall("paywall-1") else {return []}
-            
+            try await Adapty.logShowPaywall(paywall)
             let products = try await Adapty.getPaywallProducts(paywall: paywall)
             return products
         } catch {
@@ -73,72 +71,3 @@ class AdaptyManager {
         }
     }
 }
-
-//struct PaywallView: View {
-//    @Environment(\.dismiss) var dismiss
-//    @AppStorage("pro") var pro: Bool = false
-//    @State var products: [AdaptyPaywallProduct] = []
-//    @State var hasLoaded: Bool = false
-//    var body: some View {
-//        ZStack {
-//            if !hasLoaded {
-//                ProgressView()
-//            } else {
-//                paywallPage
-//            }
-//        }
-//        .navigationTitle("Get ConvertTiles Pro")
-//        .toolbar {
-//            Button(action: {
-//                dismiss()
-//            }) {
-//                Image(systemName: "multiply")
-//            }
-//        }
-//        .task {
-//            if let products = await AdaptyManager.shared.getProducts() {
-//                self.products = products
-//                hasLoaded = true
-//            }
-//        }
-//    }
-//
-//    var paywallPage: some View {
-//        List {
-//            ForEach(products, id: \.vendorProductId) { product in
-//                HStack {
-//                    VStack(alignment: .leading) {
-//                        Text(product.localizedTitle)
-//                            .font(.headline)
-//                        Text(product.localizedSubscriptionPeriod ?? "")
-//                            .font(.subheadline)
-//                        Text(product.localizedDescription)
-//
-//                    }
-//                    Spacer()
-//                    Button(action: {
-//                        Task {
-//                            if await AdaptyManager.shared.makePurchase(product: product) {
-//                                pro = true
-//                            }
-//                        }
-//                    }) {
-//                        Text(product.localizedPrice ?? "Price not available!")
-//                    }
-//                    .buttonStyle(.borderedProminent)
-//                }
-//            }
-//            Button(action: {
-//                Task {
-//                    if await AdaptyManager.shared.restorePurchases() {
-//                        pro = true
-//                    }
-//                }
-//            }) {
-//                Text("Restore Purchase")
-//            }
-//            .buttonStyle(.bordered)
-//        }
-//        .listStyle(.inset)
-//    }
-//}

@@ -19,42 +19,56 @@ struct SettingsView: View {
     var body: some View {
         List {
             Section("Color Scheme") {
-                Picker("", selection: $colorScheme) {
-                    Text("System").tag("system")
-                    Text("Light").tag("light")
-                    Text("Dark").tag("dark")
+                ZStack {
+                    Picker("", selection: $colorScheme) {
+                        Text("System").tag("system")
+                        Text("Light").tag("light")
+                        Text("Dark").tag("dark")
+                    }
+                    .pickerStyle(.segmented)
+                    .disabled(!pro)
+                    .opacity(pro ? 1.0 : 0.5)
+                    if !pro {
+                            Button(action: {
+                                showPaywallView.toggle()
+                            }) {
+                                Text("Pro")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.green)
+                            }
+                    }
                 }
-                .pickerStyle(.segmented)
             }
             Section("Tile Accent Color") {
+                segmentedColorPicker
                 if pro {
                     ColorPicker("Tile Accent Color:", selection: $accentColor)
                     Toggle(isOn: $haveAccentLines) {
                         Text("Tile Accent Lines?")
                     }
                 } else {
-                    Picker("", selection: $basicColor) {
-                        Text("Red").tag("red")
-                        Text("Green").tag("green")
-                        Text("Blue").tag("blue")
-                        Text("Black").tag("black")
-                        Text("White").tag("white")
+                    HStack {
+                        Text("Tile Accent Color:")
+                        Spacer()
+                        Button(action: {
+                            showPaywallView.toggle()
+                        }) {
+                            Text("Pro")
+                                .foregroundColor(.green)
+                                .font(.system(size: 20))
+                        }
                     }
-                    .pickerStyle(.segmented)
-                    .onChange(of: basicColor) { color in
-                        switch color {
-                        case "red":
-                            accentColor = .red
-                        case "green":
-                            accentColor = .green
-                        case "blue":
-                            accentColor = .blue
-                        case "black":
-                            accentColor = .black
-                        case "white":
-                            accentColor = .white
-                        default:
-                            accentColor = .blue
+                    HStack {
+                        Text("Tile Accent Lines?")
+                        Spacer()
+                        ZStack {
+                            Button(action: {
+                                showPaywallView.toggle()
+                            }) {
+                                Text("Pro")
+                                    .foregroundColor(.green)
+                                    .font(.system(size: 20))
+                            }
                         }
                     }
                 }
@@ -62,12 +76,15 @@ struct SettingsView: View {
             .onChange(of: accentColor) { _ in
                 UserDefaults.standard.set(encodeColor(color: accentColor), forKey: "accentColor")
             }
-            
-            Section {
-                Button(action: {
-                    showPaywallView.toggle()
-                }) {
-                 Text("Buy Premium!")
+            if !pro {
+                Section("Upgrade") {
+                    Button(action: {
+                        showPaywallView.toggle()
+                    }) {
+                        Text("Upgrade to Pro")
+                            .font(.system(size: 20))
+                            .foregroundColor(.green)
+                    }
                 }
             }
             
@@ -85,6 +102,33 @@ struct SettingsView: View {
         .fullScreenCover(isPresented: $showPaywallView) {
             NavigationStack {
                 PaywallView()
+            }
+        }
+    }
+    
+    var segmentedColorPicker: some View {
+        Picker("", selection: $basicColor) {
+            Text("Red").tag("red")
+            Text("Green").tag("green")
+            Text("Blue").tag("blue")
+            Text("Black").tag("black")
+            Text("White").tag("white")
+        }
+        .pickerStyle(.segmented)
+        .onChange(of: basicColor) { color in
+            switch color {
+            case "red":
+                accentColor = .red
+            case "green":
+                accentColor = .green
+            case "blue":
+                accentColor = .blue
+            case "black":
+                accentColor = .black
+            case "white":
+                accentColor = .white
+            default:
+                accentColor = .blue
             }
         }
     }

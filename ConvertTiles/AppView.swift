@@ -19,60 +19,65 @@ struct AppView: View {
     @State var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var isEditing: Bool = false
     @State var showPaywallView: Bool = false
+    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollingGridView(converters: $converters, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
-                .navigationTitle("Converters")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {
-                            showSettingsView.toggle()
-                        }) {
-                            Image(systemName: "gear")
-                        }
-                    }
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isEditing.toggle()
-                        }) {
-                            if isEditing {
-                                Text("Done")
-                                    .font(.system(size: 19))
-                            } else {
-                                Text("Edit")
-                                    .font(.system(size: 19))
+            if hasLaunchedBefore {
+                ScrollingGridView(converters: $converters, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
+                    .navigationTitle("Converters")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button(action: {
+                                showSettingsView.toggle()
+                            }) {
+                                Image(systemName: "gear")
                             }
                         }
-                        Button(action: {
-                            if pro {
-                                showAddConverterView.toggle()
-                            } else {
-                                if converters.count < 4 {
-                                    showAddConverterView.toggle()
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                isEditing.toggle()
+                            }) {
+                                if isEditing {
+                                    Text("Done")
+                                        .font(.system(size: 19))
                                 } else {
-                                    showPaywallView.toggle()
+                                    Text("Edit")
+                                        .font(.system(size: 19))
                                 }
                             }
-                        }) {
-                            Image(systemName: "plus")
+                            Button(action: {
+                                if pro {
+                                    showAddConverterView.toggle()
+                                } else {
+                                    if converters.count < 4 {
+                                        showAddConverterView.toggle()
+                                    } else {
+                                        showPaywallView.toggle()
+                                    }
+                                }
+                            }) {
+                                Image(systemName: "plus")
+                            }
                         }
                     }
-                }
-                .sheet(isPresented: $showAddConverterView) {
-                    NavigationStack {
-                        AddConverterView(converters: $converters, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
+                    .sheet(isPresented: $showAddConverterView) {
+                        NavigationStack {
+                            AddConverterView(converters: $converters, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
+                        }
                     }
-                }
-                .sheet(isPresented: $showSettingsView) {
-                    NavigationStack {
-                        SettingsView(autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
+                    .sheet(isPresented: $showSettingsView) {
+                        NavigationStack {
+                            SettingsView(autoColorScheme: _autoColorScheme, haveAccentLines: $haveAccentLines, accentColor: $accentColor)
+                        }
                     }
-                }
-                .fullScreenCover(isPresented: $showPaywallView) {
-                    NavigationStack {
-                        PaywallView()
+                    .fullScreenCover(isPresented: $showPaywallView) {
+                        NavigationStack {
+                            PaywallView()
+                        }
                     }
-                }
+            } else {
+                LaunchView(hasLaunchedBefore: $hasLaunchedBefore, pro: $pro, showPaywallView: $showPaywallView)
+            }
         }
         .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
         .task {
