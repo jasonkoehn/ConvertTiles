@@ -19,8 +19,7 @@ struct AppView: View {
     @State var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var isEditing: Bool = false
     @State var showPaywallView: Bool = false
-//    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
-    @State var hasLaunchedBefore: Bool = false
+    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
     var body: some View {
         NavigationStack {
             if hasLaunchedBefore {
@@ -91,11 +90,11 @@ struct AppView: View {
                     converters = response
                 }
             }
-//            if await AdaptyManager.shared.getAccessLevel() {
-//                pro = true
-//            } else {
-//                pro = false
-//            }
+            if await AdaptyManager.shared.getAccessLevel() {
+                pro = true
+            } else {
+                pro = false
+            }
         }
         .onChange(of: converters) { _ in
             saveArray(converters: converters)
