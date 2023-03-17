@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8720772329C4F19B008E2F04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8720772229C4F19B008E2F04 /* Store.swift */; };
 		87213DF629C3A44E006128D4 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87213DF529C3A44E006128D4 /* LaunchView.swift */; };
 		872B0D1E29AFBBD6003B3D8D /* AppIconSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */; };
 		8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EB94299D848A000026A4 /* ConvertTilesApp.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8720772229C4F19B008E2F04 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		87213DF529C3A44E006128D4 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSwift.swift; sourceTree = "<group>"; };
 		872E36DF29A832600091FD00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				8739EBA9299D91FE000026A4 /* SettingsView.swift */,
 				87DBB93C29BFD2B20071154E /* PaywallView.swift */,
 				8739EBA7299D8F2C000026A4 /* Structs&Funcs.swift */,
+				8720772229C4F19B008E2F04 /* Store.swift */,
 				87DBB93A29BFD29A0071154E /* AdaptyManager.swift */,
 				8739EB98299D848B000026A4 /* Assets.xcassets */,
 				8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */,
@@ -191,6 +194,7 @@
 				8739EBA8299D8F2C000026A4 /* Structs&Funcs.swift in Sources */,
 				87213DF629C3A44E006128D4 /* LaunchView.swift in Sources */,
 				87DBB93B29BFD29A0071154E /* AdaptyManager.swift in Sources */,
+				8720772329C4F19B008E2F04 /* Store.swift in Sources */,
 				8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */,
 				8739EBAE299DACC0000026A4 /* TileView.swift in Sources */,
 				8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */,

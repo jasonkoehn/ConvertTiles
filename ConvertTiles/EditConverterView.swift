@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditConverterView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var converters: [Converter]
+    @EnvironmentObject var store: Store
     var accentColor: Color
     @State var haveAccentLines: Bool
     @State var id: UUID
@@ -76,13 +76,13 @@ struct EditConverterView: View {
         .navigationTitle("Edit Converter")
         .toolbar {
             Button(action: {
-                if let idx = converters.firstIndex(where: {$0.id == id}) {
-                    converters[idx].name = name
-                    converters[idx].hasCustomColor = hasCustomColor
-                    converters[idx].hasAccentLine = hasAccentLine
-                    converters[idx].hasCustomAccentLineColor = hasCustomAccentLineColor
-                    converters[idx].customColor = encodeColor(color: customColor)
-                    converters[idx].customAccentLineColor = encodeColor(color: customAccentLineColor)
+                if let idx = store.converters.firstIndex(where: {$0.id == id}) {
+                    store.converters[idx].name = name
+                    store.converters[idx].hasCustomColor = hasCustomColor
+                    store.converters[idx].hasAccentLine = hasAccentLine
+                    store.converters[idx].hasCustomAccentLineColor = hasCustomAccentLineColor
+                    store.converters[idx].customColor = encodeColor(color: customColor)
+                    store.converters[idx].customAccentLineColor = encodeColor(color: customAccentLineColor)
                 }
                 dismiss()
             }) {

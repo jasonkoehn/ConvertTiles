@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddConverterView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var converters: [Converter]
+    @EnvironmentObject var store: Store
     @AppStorage("pro") var pro: Bool = false
     var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var haveAccentLines: Bool
@@ -157,7 +157,7 @@ struct AddConverterView: View {
             if group == "" {
                 if !pro && name != "" {
                     Button(action: {
-                        converters.append(Converter(id: UUID(), name: name, units: units, inUnit: inUnit, outUnit: outUnit, singleUnits: false, hasCustomColor: false, hasAccentLine: false, hasCustomAccentLineColor: false, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
+                        store.converters.append(Converter(id: UUID(), name: name, units: units, inUnit: inUnit, outUnit: outUnit, singleUnits: false, hasCustomColor: false, hasAccentLine: false, hasCustomAccentLineColor: false, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
                         dismiss()
                     }) {
                         Text("Add")
@@ -171,7 +171,7 @@ struct AddConverterView: View {
                 }
             } else {
                 Button(action: {
-                    converters.append(Converter(id: UUID(), name: name, units: hasCustomUnits ? customUnits : units, inUnit: inUnit, outUnit: outUnit, singleUnits: singleUnits, hasCustomColor: hasCustomColor, hasAccentLine: hasAccentLine, hasCustomAccentLineColor: hasCustomAccentLineColor, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
+                    store.converters.append(Converter(id: UUID(), name: name, units: hasCustomUnits ? customUnits : units, inUnit: inUnit, outUnit: outUnit, singleUnits: singleUnits, hasCustomColor: hasCustomColor, hasAccentLine: hasAccentLine, hasCustomAccentLineColor: hasCustomAccentLineColor, customColor: encodeColor(color: customColor), customAccentLineColor: encodeColor(color: customAccentLineColor)))
                     dismiss()
                 }) {
                     Text("Add")

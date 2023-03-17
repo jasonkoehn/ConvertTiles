@@ -21,16 +21,6 @@ struct Converter: Codable, Identifiable, Hashable {
     var customAccentLineColor: [CGFloat]
 }
 
-func saveArray(converters: [Converter]) {
-    let manager = FileManager.default
-    guard let managerUrl = manager.urls(for: .documentDirectory, in: .userDomainMask).first else {return}
-    let encoder = PropertyListEncoder()
-    let convertersUrl = managerUrl.appendingPathComponent("converters.plist")
-    manager.createFile(atPath: convertersUrl.path, contents: nil, attributes: nil)
-    let encodedData = try! encoder.encode(converters)
-    try! encodedData.write(to: convertersUrl)
-}
-
 func encodeColor(color: Color) -> [CGFloat] {
     let color = UIColor(color).cgColor
     let components = color.components ?? [0.0, 0.372549019607843, 0.96078431372549, 1.0]

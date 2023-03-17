@@ -10,9 +10,9 @@ import SwiftUI
 struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var store: Store
     @AppStorage("pro") var pro: Bool = false
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @State var converters: [Converter] = []
     @State var showAddConverterView: Bool = false
     @State var showSettingsView: Bool = false
     @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
@@ -23,7 +23,7 @@ struct AppView: View {
     var body: some View {
         NavigationStack {
             if hasLaunchedBefore {
-                ScrollingGridView(converters: $converters, accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
+                ScrollingGridView(accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                     .navigationTitle("Converters")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -49,7 +49,7 @@ struct AppView: View {
                                 if pro {
                                     showAddConverterView.toggle()
                                 } else {
-                                    if converters.count < 4 {
+                                    if store.converters.count < 4 {
                                         showAddConverterView.toggle()
                                     } else {
                                         showPaywallView.toggle()
@@ -62,7 +62,7 @@ struct AppView: View {
                     }
                     .sheet(isPresented: $showAddConverterView) {
                         NavigationStack {
-                            AddConverterView(converters: $converters, haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
+                            AddConverterView(haveAccentLines: haveAccentLines, hasAccentLine: haveAccentLines)
                         }
                     }
                     .sheet(isPresented: $showSettingsView) {
@@ -81,23 +81,14 @@ struct AppView: View {
         }
         .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
         .task {
-            let manager = FileManager.default
-            let decoder = PropertyListDecoder()
-            guard let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first else {return}
-            let convertersUrl = url.appendingPathComponent("converters.plist")
-            if let data = try? Data(contentsOf: convertersUrl) {
-                if let response = try? decoder.decode([Converter].self, from: data) {
-                    converters = response
-                }
-            }
             if await AdaptyManager.shared.getAccessLevel() {
                 pro = true
             } else {
                 pro = false
             }
         }
-        .onChange(of: converters) { _ in
-            saveArray(converters: converters)
+        .onChange(of: store.converters) { _ in
+            store.saveConverters()
         }
     }
 }

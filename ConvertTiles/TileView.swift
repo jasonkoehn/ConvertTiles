@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TileView: View {
-    @Binding var converters: [Converter]
+    @EnvironmentObject var store: Store
     var accentColor: Color
     var id: UUID
     var name: String
@@ -112,15 +112,15 @@ struct TileView: View {
         .cornerRadius(10)
         .onChange(of: scenePhase) { phase in
             if phase == .background {
-                if let idx = converters.firstIndex(where: {$0.id == id}) {
-                    converters[idx].inUnit = inUnit
+                if let idx = store.converters.firstIndex(where: {$0.id == id}) {
+                    store.converters[idx].inUnit = inUnit
                 }
             }
         }
         .onChange(of: scenePhase) { phase in
             if phase == .background {
-                if let idx = converters.firstIndex(where: {$0.id == id}) {
-                    converters[idx].outUnit = outUnit
+                if let idx = store.converters.firstIndex(where: {$0.id == id}) {
+                    store.converters[idx].outUnit = outUnit
                 }
             }
         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScrollingGridView: View {
     @FocusState var isInputActive: Bool
-    @Binding var converters: [Converter]
+    @EnvironmentObject var store: Store
     @AppStorage("pro") var pro: Bool = false
     var accentColor: Color
     @Environment var scenePhase: ScenePhase
@@ -21,9 +21,9 @@ struct ScrollingGridView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 335))]) {
-                ReorderableForEach($converters, allowReordering: $isEditing) { converter, isDragged in
+                ReorderableForEach($store.converters, allowReordering: $isEditing) { converter, isDragged in
                     ZStack {
-                        TileView(converters: $converters, accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: pro ? converter.hasCustomColor : false, hasAccentLine: pro ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing, isInputActive: _isInputActive)
+                        TileView(accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: pro ? converter.hasCustomColor : false, hasAccentLine: pro ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing, isInputActive: _isInputActive)
                         if isEditing {
                             withAnimation(.easeInOut(duration: 5.0)) {
                                 HStack {
@@ -69,7 +69,7 @@ struct ScrollingGridView: View {
         }
         .sheet(item: $selectedConverter) { converter in
             NavigationStack {
-                EditConverterView(converters: $converters, accentColor: accentColor, haveAccentLines: haveAccentLines, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: converter.hasCustomColor, hasAccentLine: converter.hasAccentLine, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor))
+                EditConverterView(accentColor: accentColor, haveAccentLines: haveAccentLines, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: converter.hasCustomColor, hasAccentLine: converter.hasAccentLine, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor))
             }
         }
         .alert("Are you sure you want to delete this converter?", isPresented: $showAlert, presenting: deleteId) { id in
@@ -77,8 +77,8 @@ struct ScrollingGridView: View {
                 Text("No")
             }
             Button(role: .destructive ,action: {
-                if let idx = converters.firstIndex(where: {$0.id == id}) {
-                    converters.remove(at: idx)
+                if let idx = store.converters.firstIndex(where: {$0.id == id}) {
+                    store.converters.remove(at: idx)
                 }
             }) {
                 Text("Yes")
