@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8720772329C4F19B008E2F04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8720772229C4F19B008E2F04 /* Store.swift */; };
+		8720772629C5270B008E2F04 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8720772529C5270B008E2F04 /* StoreKit.framework */; };
 		87213DF629C3A44E006128D4 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87213DF529C3A44E006128D4 /* LaunchView.swift */; };
 		872B0D1E29AFBBD6003B3D8D /* AppIconSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */; };
 		8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EB94299D848A000026A4 /* ConvertTilesApp.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		8720772229C4F19B008E2F04 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		8720772529C5270B008E2F04 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		87213DF529C3A44E006128D4 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		872B0D1D29AFBBD6003B3D8D /* AppIconSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSwift.swift; sourceTree = "<group>"; };
 		872E36DF29A832600091FD00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -58,17 +60,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				87E1601F29B6B8BE00B8BEC7 /* Adapty in Frameworks */,
+				8720772629C5270B008E2F04 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8720772429C5270B008E2F04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8720772529C5270B008E2F04 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8739EB88299D848A000026A4 = {
 			isa = PBXGroup;
 			children = (
 				8739EB93299D848A000026A4 /* ConvertTiles */,
 				8739EB92299D848A000026A4 /* Products */,
+				8720772429C5270B008E2F04 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -337,6 +349,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ConvertTiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ConvertTiles;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -382,6 +395,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ConvertTiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ConvertTiles;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

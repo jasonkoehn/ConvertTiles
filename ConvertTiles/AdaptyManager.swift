@@ -19,14 +19,13 @@ class AdaptyManager {
     
     func getAccessLevel() async -> Bool {
         do {
-            let profileInfo = try await Adapty.getProfile()
-            if profileInfo?.accessLevels[accessLevelKey]?.isActive == true {
+            let profile = try await Adapty.getProfile()
+            if profile?.accessLevels[accessLevelKey]?.isActive == true {
                 return true
             } else {
                 return false
             }
         } catch {
-            print("🤬"+error.localizedDescription)
             return false
         }
     }
@@ -40,12 +39,11 @@ class AdaptyManager {
                 return false
             }
         } catch {
-            print("🤬"+error.localizedDescription)
             return false
         }
     }
     
-    func restorePurchases() async -> Bool {
+    func restorePurchase() async -> Bool {
         do {
             let restoreResult = try await Adapty.restorePurchases()
             if restoreResult.accessLevels[accessLevelKey]?.isActive == true {
@@ -54,7 +52,6 @@ class AdaptyManager {
                 return false
             }
         } catch {
-            print("🤬"+error.localizedDescription)
             return false
         }
     }
@@ -66,7 +63,6 @@ class AdaptyManager {
             let products = try await Adapty.getPaywallProducts(paywall: paywall)
             return products
         } catch {
-            print(error.localizedDescription)
             return []
         }
     }

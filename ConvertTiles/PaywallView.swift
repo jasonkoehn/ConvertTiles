@@ -58,23 +58,20 @@ struct PaywallView: View {
         }
     }
     
-    // MARK: Paywall Page
     var paywallPage: some View {
         ScrollView {
             VStack {
                 Text("ConvertTiles Pro")
+                    .foregroundColor(.white)
                     .font(.system(size: 40))
                     .fontDesign(.serif)
                     .fontWeight(.semibold)
-                    .foregroundColor(.white)
                 iconImageSection
                 advantagesSection
-
                 buttonSection
                     .padding(.vertical, 20)
                 informationSection
                 HStack {Spacer()}
-
             }
             .padding(.top, 50)
         }
@@ -89,7 +86,6 @@ struct PaywallView: View {
         }
     }
     
-    // MARK: Image Section
     var iconImageSection: some View {
         ZStack {
             Image("Icon")
@@ -97,8 +93,8 @@ struct PaywallView: View {
                 .frame(width: 160, height: 160)
                 .cornerRadius(35)
             Text("Pro")
-                .font(.system(size: 60))
                 .foregroundColor(.white)
+                .font(.system(size: 60))
                 .fontDesign(.monospaced)
                 .fontWeight(.bold)
                 .rotationEffect(.degrees(335))
@@ -107,12 +103,11 @@ struct PaywallView: View {
         .padding(.bottom, 20)
     }
     
-    // MARK: Adavatages Section
     var advantagesSection: some View {
         VStack(alignment: .leading) {
             Text("Pro gets you:")
-                .font(.system(size: 26))
                 .foregroundColor(.white)
+                .font(.system(size: 26))
             Group {
                 Text("-many more converter options")
                     .foregroundColor(.teal)
@@ -135,7 +130,6 @@ struct PaywallView: View {
         }
     }
     
-    // MARK: Button Section
     var buttonSection: some View {
         VStack(spacing: 15) {
             ForEach(products, id: \.localizedTitle) { product in
@@ -164,9 +158,9 @@ struct PaywallView: View {
                         }
                         if product.introductoryOfferEligibility == .eligible {
                             Text("1 week free trial")
-                                .italic()
-                                .font(.system(size: 17))
                                 .foregroundColor(.white)
+                                .font(.system(size: 17))
+                                .italic()
                         }
                         Spacer()
                     }
@@ -179,7 +173,7 @@ struct PaywallView: View {
             Button(action: {
                 Task {
                     overlay = true
-                    if await AdaptyManager.shared.restorePurchases() {
+                    if await AdaptyManager.shared.restorePurchase() {
                         pro = true
                         showSucceededAlert.toggle()
                         overlay = false
@@ -198,13 +192,12 @@ struct PaywallView: View {
         }
     }
     
-    // MARK: Information Section
     var informationSection: some View {
         VStack(alignment: .leading, spacing: 5) {
             Text("If canceled within trial period no charges are applied.")
                 .font(.system(size: 15))
-                .padding(.bottom, 5)
                 .fontDesign(.monospaced)
+                .padding(.bottom, 5)
             Group {
                 Text("Payment will be charged to Apple ID Account at confirmation of purchase.")
                 Text("Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period.")
@@ -213,8 +206,11 @@ struct PaywallView: View {
                 Text("Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable.")
             }
             .font(.system(size: 10))
+            Link("Contact Info and Privacy Policy", destination: URL(string: "https://jasonkoehn.github.io/converttiles")!)
+                .foregroundColor(.blue)
+                .font(.system(size: 12))
         }
-        .frame(width: 310)
         .foregroundColor(.white)
+        .frame(width: 310)
     }
 }

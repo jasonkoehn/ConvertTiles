@@ -11,7 +11,6 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @AppStorage("ColorScheme") var colorScheme: String = "system"
     @AppStorage("pro") var pro: Bool = false
-    @AppStorage("basicColor") var basicColor: String = "blue"
     @Environment var autoColorScheme: ColorScheme
     @Binding var haveAccentLines: Bool
     @Binding var accentColor: Color
@@ -29,18 +28,25 @@ struct SettingsView: View {
                     .disabled(!pro)
                     .opacity(pro ? 1.0 : 0.5)
                     if !pro {
-                            Button(action: {
-                                showPaywallView.toggle()
-                            }) {
-                                Text("Pro")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.green)
-                            }
+                        Button(action: {
+                            showPaywallView.toggle()
+                        }) {
+                            Text("Pro")
+                                .foregroundColor(.green)
+                                .font(.system(size: 20))
+                        }
                     }
                 }
             }
             Section("Tile Accent Color") {
-                segmentedColorPicker
+                Picker("", selection: $accentColor) {
+                    Text("Red").tag(Color.red)
+                    Text("Green").tag(Color.green)
+                    Text("Blue").tag(Color.blue)
+                    Text("Black").tag(Color.black)
+                    Text("White").tag(Color.white)
+                }
+                .pickerStyle(.segmented)
                 if pro {
                     ColorPicker("Tile Accent Color:", selection: $accentColor)
                     Toggle(isOn: $haveAccentLines) {
@@ -61,14 +67,12 @@ struct SettingsView: View {
                     HStack {
                         Text("Tile Accent Lines?")
                         Spacer()
-                        ZStack {
-                            Button(action: {
-                                showPaywallView.toggle()
-                            }) {
-                                Text("Pro")
-                                    .foregroundColor(.green)
-                                    .font(.system(size: 20))
-                            }
+                        Button(action: {
+                            showPaywallView.toggle()
+                        }) {
+                            Text("Pro")
+                                .foregroundColor(.green)
+                                .font(.system(size: 20))
                         }
                     }
                 }
@@ -82,12 +86,11 @@ struct SettingsView: View {
                         showPaywallView.toggle()
                     }) {
                         Text("Upgrade to Pro")
-                            .font(.system(size: 20))
                             .foregroundColor(.green)
+                            .font(.system(size: 20))
                     }
                 }
             }
-            
         }
         .navigationTitle("Settings")
         .toolbar {
@@ -102,33 +105,6 @@ struct SettingsView: View {
         .fullScreenCover(isPresented: $showPaywallView) {
             NavigationStack {
                 PaywallView()
-            }
-        }
-    }
-    
-    var segmentedColorPicker: some View {
-        Picker("", selection: $basicColor) {
-            Text("Red").tag("red")
-            Text("Green").tag("green")
-            Text("Blue").tag("blue")
-            Text("Black").tag("black")
-            Text("White").tag("white")
-        }
-        .pickerStyle(.segmented)
-        .onChange(of: basicColor) { color in
-            switch color {
-            case "red":
-                accentColor = .red
-            case "green":
-                accentColor = .green
-            case "blue":
-                accentColor = .blue
-            case "black":
-                accentColor = .black
-            case "white":
-                accentColor = .white
-            default:
-                accentColor = .blue
             }
         }
     }

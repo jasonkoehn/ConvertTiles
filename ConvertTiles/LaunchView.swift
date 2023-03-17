@@ -15,13 +15,13 @@ struct LaunchView: View {
     @State var showSucceededAlert: Bool = false
     @State var showFailedAlert: Bool = false
     var body: some View {
-        VStack(spacing: 13) {
+        VStack(spacing: 10) {
             Group {
                 Text("Welcome To")
+                    .foregroundColor(.green)
                     .font(.system(size: 45))
                     .fontDesign(.monospaced)
                     .fontWeight(.semibold)
-                    .foregroundColor(.green)
                 Text("ConvertTiles")
                     .font(.system(size: 50))
                     .fontDesign(.serif)
@@ -41,16 +41,16 @@ struct LaunchView: View {
                 .font(.system(size: 24))
                 .fontDesign(.monospaced)
             Button(action: {
-                    showPaywallView.toggle()
+                showPaywallView.toggle()
                 hasLaunchedBefore = true
             }) {
                 VStack {
                     Text("Learn More")
-                        .font(.system(size: 28))
                         .foregroundColor(.blue)
+                        .font(.system(size: 28))
                     Text("One week free trial than                   $0.49/month or $4.99/year")
-                        .font(.system(size: 17))
                         .foregroundColor(.green)
+                        .font(.system(size: 17))
                 }
                 .frame(width: 310, height: 80)
                 .background(Color.black)
@@ -65,7 +65,7 @@ struct LaunchView: View {
             Button(action: {
                 Task {
                     showProgressView = true
-                    if await AdaptyManager.shared.restorePurchases() {
+                    if await AdaptyManager.shared.restorePurchase() {
                         pro = true
                         showSucceededAlert.toggle()
                         showProgressView = false
@@ -76,16 +76,18 @@ struct LaunchView: View {
                 }
             }) {
                 Text("Restore Purchase")
-                    .font(.system(size: 17))
                     .foregroundColor(.blue)
+                    .font(.system(size: 17))
             }
+            Link("Contact Info and Privacy Policy", destination: URL(string: "https://jasonkoehn.github.io/converttiles")!)
+                .foregroundColor(.blue)
+                .font(.system(size: 12))
             Spacer()
-            
             HStack{Spacer()}
         }
+        .foregroundColor(.white)
         .padding(.top, 20)
         .background(Color(red: 0.261, green: 0.261, blue: 0.261))
-        .foregroundColor(.white)
         .overlay {
             if showProgressView {
                 ZStack {

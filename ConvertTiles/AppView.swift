@@ -11,15 +11,15 @@ struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var store: Store
+    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
     @AppStorage("pro") var pro: Bool = false
     @AppStorage("ColorScheme") var colorScheme: String = "system"
+    @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
     @State var showAddConverterView: Bool = false
     @State var showSettingsView: Bool = false
-    @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
+    @State var showPaywallView: Bool = false
     @State var accentColor: Color = decodeUDColor(key: "accentColor")
     @State var isEditing: Bool = false
-    @State var showPaywallView: Bool = false
-    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
     var body: some View {
         NavigationStack {
             if hasLaunchedBefore {
