@@ -46,7 +46,6 @@ struct PaywallView: View {
         }
         .alert("Restore Succeeded", isPresented: $showSucceededAlert) {
             Button(role: .cancel, action: {
-                overlay = false
                 dismiss()
             }) {
                 Text("OK")
@@ -183,9 +182,10 @@ struct PaywallView: View {
                     if await AdaptyManager.shared.restorePurchases() {
                         pro = true
                         showSucceededAlert.toggle()
-                    } else {
                         overlay = false
+                    } else {
                         showFailedAlert.toggle()
+                        overlay = false
                     }
                 }
             }) {

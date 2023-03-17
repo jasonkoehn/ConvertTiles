@@ -11,6 +11,9 @@ struct LaunchView: View {
     @Binding var hasLaunchedBefore: Bool
     @Binding var pro: Bool
     @Binding var showPaywallView: Bool
+    @State var showProgressView: Bool = false
+    @State var showSucceededAlert: Bool = false
+    @State var showFailedAlert: Bool = false
     var body: some View {
         VStack(spacing: 13) {
             Group {
@@ -61,9 +64,14 @@ struct LaunchView: View {
             }
             Button(action: {
                 Task {
+                    showProgressView = true
                     if await AdaptyManager.shared.restorePurchases() {
                         pro = true
-                        hasLaunchedBefore = true
+                        showSucceededAlert.toggle()
+                        showProgressView = false
+                    } else {
+                        showFailedAlert.toggle()
+                        showProgressView = false
                     }
                 }
             }) {
@@ -78,5 +86,25 @@ struct LaunchView: View {
         .padding(.top, 20)
         .background(Color(red: 0.261, green: 0.261, blue: 0.261))
         .foregroundColor(.white)
+        .overlay {
+            if showProgressView {
+                ZStack {
+                    Color.black.opacity(0.5).ignoresSafeArea(.all)
+                    ProgressView()
+                }
+            }
+        }
+        .alert("Restore Succeeded", isPresented: $showSucceededAlert) {
+            Button(role: .cancel, action: {
+                hasLaunchedBefore = true
+            }) {
+                Text("OK")
+            }
+        }
+        .alert("Restore Failed", isPresented: $showFailedAlert) {
+            Button(role: .cancel, action: {}) {
+                Text("OK")
+            }
+        }
     }
 }
