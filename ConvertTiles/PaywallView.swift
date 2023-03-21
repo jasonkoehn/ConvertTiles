@@ -123,7 +123,7 @@ struct PaywallView: View {
                     .foregroundColor(.orange)
                 Text("-support further app development")
                     .foregroundColor(.blue)
-                Text("-cancel anytime")
+                Text("-one time purchase")
                     .foregroundColor(.white)
             }
             .font(.system(size: 19))
@@ -147,24 +147,22 @@ struct PaywallView: View {
                 }) {
                     VStack {
                         Spacer()
+                        Text("Lifetime Purchase")
+                            .font(.system(size: 18))
+                            .foregroundColor(.white)
                         HStack {
                             Spacer()
-                            Text(product.localizedTitle+":")
-                                .font(.system(size: 23))
+                            Text("Buy now:")
+                                .font(.system(size: 19))
+                                .foregroundColor(.green)
                             Spacer()
-                            Text(product.localizedPrice!+"/"+product.localizedDescription)
+                            Text(product.localizedPrice!)
                                 .font(.system(size: 20))
+                                .foregroundColor(.blue)
                             Spacer()
-                        }
-                        if product.introductoryOfferEligibility == .eligible {
-                            Text("1 week free trial")
-                                .foregroundColor(.white)
-                                .font(.system(size: 17))
-                                .italic()
                         }
                         Spacer()
                     }
-                    .foregroundColor(.blue)
                     .frame(width: 310, height: 60)
                     .background(Color.black)
                     .cornerRadius(15)
@@ -194,23 +192,13 @@ struct PaywallView: View {
     
     var informationSection: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text("If canceled within trial period no charges are applied.")
-                .font(.system(size: 15))
-                .fontDesign(.monospaced)
-                .padding(.bottom, 5)
-            Group {
-                Text("Payment will be charged to Apple ID Account at confirmation of purchase.")
-                Text("Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period.")
-                Text("Account will be charged for renewal within 24-hours prior to the end of the current period, and identify the cost of the renewal.")
-                Text("Subscriptions may be managed by the user and auto renewal may be turned off by going to the user's Account Settings after purchase.")
-                Text("Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable.")
-            }
-            .font(.system(size: 10))
+            Text("Payment will be charged to Apple ID Account at confirmation of purchase.")
+                .font(.system(size: 12))
+                .foregroundColor(.white)
             Link("Contact Info and Privacy Policy", destination: URL(string: "https://jasonkoehn.github.io/converttiles")!)
                 .foregroundColor(.blue)
                 .font(.system(size: 12))
         }
-        .foregroundColor(.white)
         .frame(width: 310)
     }
 }

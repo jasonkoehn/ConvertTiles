@@ -66,4 +66,12 @@ class AdaptyManager {
             return []
         }
     }
+    
+    func getPrice() async -> String {
+        if let products = await getProducts() {
+            return products.first?.localizedPrice ?? ""
+        } else {
+            return ""
+        }
+    }
 }

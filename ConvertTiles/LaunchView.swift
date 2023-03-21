@@ -14,6 +14,7 @@ struct LaunchView: View {
     @State var showProgressView: Bool = false
     @State var showSucceededAlert: Bool = false
     @State var showFailedAlert: Bool = false
+    @State var price: String = ""
     var body: some View {
         VStack(spacing: 10) {
             Group {
@@ -46,13 +47,20 @@ struct LaunchView: View {
             }) {
                 VStack {
                     Text("Learn More")
-                        .foregroundColor(.blue)
-                        .font(.system(size: 28))
-                    Text("One week free trial than                   $0.49/month or $4.99/year")
-                        .foregroundColor(.green)
-                        .font(.system(size: 17))
+                        .foregroundColor(.white)
+                        .font(.system(size: 24))
+                    HStack {
+                        
+                        Text("Lifetime Purchase:  ")
+                            .foregroundColor(.green)
+                            .font(.system(size: 17))
+                        Text(price)
+                            .foregroundColor(.blue)
+                            .font(.system(size: 17))
+                        
+                    }
                 }
-                .frame(width: 310, height: 80)
+                .frame(width: 310, height: 60)
                 .background(Color.black)
                 .cornerRadius(10)
             }
@@ -106,6 +114,12 @@ struct LaunchView: View {
         .alert("Restore Failed", isPresented: $showFailedAlert) {
             Button(role: .cancel, action: {}) {
                 Text("OK")
+            }
+        }
+        .task {
+            price = await AdaptyManager.shared.getPrice()
+            if await AdaptyManager.shared.getAccessLevel() {
+                pro = true
             }
         }
     }

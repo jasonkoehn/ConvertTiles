@@ -80,13 +80,6 @@ struct AppView: View {
             }
         }
         .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))
-        .task {
-            if await AdaptyManager.shared.getAccessLevel() {
-                pro = true
-            } else {
-                pro = false
-            }
-        }
         .onChange(of: store.converters) { _ in
             store.saveConverters()
         }
