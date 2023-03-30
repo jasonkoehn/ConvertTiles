@@ -53,11 +53,15 @@ struct TileView: View {
                                 .textFieldStyle(.roundedBorder)
                                 .font(.title3)
                                 .frame(width: 100)
-                                .keyboardType(.decimalPad)
+                                .keyboardType(.numbersAndPunctuation)
+                                .autocorrectionDisabled()
+                                .submitLabel(.done)
                                 .focused($isInputActive)
                                 .disabled(isEditing)
                                 .onTapGesture {
-                                    initialValue = 0
+                                    if initialValue == 1 {
+                                        initialValue = 0
+                                    }
                                 }
                                 .onChange(of: isInputActive) { input in
                                     if input == false && initialValue == 0 {

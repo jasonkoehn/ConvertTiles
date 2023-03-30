@@ -47,10 +47,14 @@ struct TilePreView: View {
                                 .textFieldStyle(.roundedBorder)
                                 .font(.title3)
                                 .frame(width: 100)
-                                .keyboardType(.decimalPad)
+                                .keyboardType(.numbersAndPunctuation)
+                                .autocorrectionDisabled()
+                                .submitLabel(.done)
                                 .focused($isInputActive)
                                 .onTapGesture {
-                                    initialValue = 0
+                                    if initialValue == 1 {
+                                        initialValue = 0
+                                    }
                                 }
                                 .onChange(of: isInputActive) { input in
                                     if input == false && initialValue == 0 {
@@ -101,13 +105,5 @@ struct TilePreView: View {
         .background(hasAccentLine ? customAccentLineColor : Color(.systemGray5))
         .cornerRadius(10)
         .padding(.horizontal, 7)
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") {
-                    isInputActive = false
-                }
-            }
-        }
     }
 }

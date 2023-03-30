@@ -31,6 +31,7 @@ struct EditConverterView: View {
                     Text("Name:")
                     TextField("", text: $name)
                         .textFieldStyle(.roundedBorder)
+                        .submitLabel(.done)
                 }
                 Toggle("Custom Color?", isOn: $hasCustomColor)
                     .onChange(of: hasCustomColor) { hcc in

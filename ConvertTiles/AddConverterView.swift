@@ -52,6 +52,7 @@ struct AddConverterView: View {
                             Text("Name:")
                             TextField("", text: $name)
                                 .textFieldStyle(.roundedBorder)
+                                .submitLabel(.done)
                         }
                         Picker("", selection: $singleUnits) {
                             Text("All Units").tag(false)

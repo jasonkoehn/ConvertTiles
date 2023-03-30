@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ScrollingGridView: View {
-    @FocusState var isInputActive: Bool
     @EnvironmentObject var store: Store
     @AppStorage("pro") var pro: Bool = false
     var accentColor: Color
@@ -23,7 +22,7 @@ struct ScrollingGridView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 335))]) {
                 ReorderableForEach($store.converters, allowReordering: $isEditing) { converter, isDragged in
                     ZStack {
-                        TileView(accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: pro ? converter.hasCustomColor : false, hasAccentLine: pro ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing, isInputActive: _isInputActive)
+                        TileView(accentColor: accentColor, id: converter.id, name: converter.name, units: converter.units, inUnit: converter.inUnit, outUnit: converter.outUnit, singleUnits: converter.singleUnits, hasCustomColor: pro ? converter.hasCustomColor : false, hasAccentLine: pro ? (haveAccentLines ? converter.hasAccentLine : false) : false, hasCustomAccentLineColor: converter.hasCustomAccentLineColor, customColor: decodeColor(color: converter.customColor), customAccentLineColor: decodeColor(color: converter.customAccentLineColor), scenePhase: _scenePhase, isEditing: isEditing)
                         if isEditing {
                             withAnimation(.easeInOut(duration: 5.0)) {
                                 HStack {
@@ -82,14 +81,6 @@ struct ScrollingGridView: View {
                 }
             }) {
                 Text("Yes")
-            }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") {
-                    isInputActive = false
-                }
             }
         }
     }
