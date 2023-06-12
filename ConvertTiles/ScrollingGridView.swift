@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import StoreKit 
 
 struct ScrollingGridView: View {
     @EnvironmentObject var store: Store
+    @Environment(\.requestReview) var requestReview
     @AppStorage("pro") var pro: Bool = false
     var accentColor: Color
     @Environment var scenePhase: ScenePhase
@@ -83,5 +85,11 @@ struct ScrollingGridView: View {
                 Text("Yes")
             }
         }
+        
+        .task {
+            try? await Task.sleep(for: .seconds(5))
+            requestReview()
+        }
+        
     }
 }

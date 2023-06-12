@@ -5,7 +5,7 @@
 //  Created by Jason Koehn on 3/17/23.
 //
 
-import Foundation
+import SwiftUI
 
 class Store: ObservableObject {
     @Published var converters: [Converter] = []
