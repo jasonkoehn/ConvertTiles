@@ -20,3 +20,8 @@ struct ConvertTilesApp: App {
         }
     }
 }
+
+
+// add update page
+// add free trial
+// redo paywall page
