@@ -11,7 +11,7 @@ struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var store: Store
-    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
+    @AppStorage("versionNumber") var versionNumber: String = "0"
     @AppStorage("pro") var pro: Bool = false
     @AppStorage("ColorScheme") var colorScheme: String = "system"
     @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
@@ -22,7 +22,7 @@ struct AppView: View {
     @State var isEditing: Bool = false
     var body: some View {
         NavigationStack {
-            if hasLaunchedBefore {
+            if versionNumber == store.appVersionNumber {
                 ScrollingGridView(accentColor: accentColor, scenePhase: _scenePhase, isEditing: $isEditing, haveAccentLines: $haveAccentLines)
                     .navigationTitle("Converters")
                     .toolbar {
@@ -75,8 +75,12 @@ struct AppView: View {
                             PaywallView()
                         }
                     }
-            } else {
-                LaunchView(hasLaunchedBefore: $hasLaunchedBefore, pro: $pro, showPaywallView: $showPaywallView)
+            } else{
+                if versionNumber != "0" && versionNumber != store.appVersionNumber {
+                    UpdateView(versionNumber: $versionNumber)
+                } else {
+                    LaunchView(versionNumber: $versionNumber, pro: $pro, showPaywallView: $showPaywallView)
+                }
             }
         }
         .preferredColorScheme(colorScheme == "system" ? nil : (colorScheme == "dark" ? .dark : .light))

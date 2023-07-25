@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LaunchView: View {
-    @Binding var hasLaunchedBefore: Bool
+    @EnvironmentObject var store: Store
+    @Binding var versionNumber: String
     @Binding var pro: Bool
     @Binding var showPaywallView: Bool
     @State var showProgressView: Bool = false
@@ -43,7 +44,7 @@ struct LaunchView: View {
                 .fontDesign(.monospaced)
             Button(action: {
                 showPaywallView.toggle()
-                hasLaunchedBefore = true
+                versionNumber = store.appVersionNumber
             }) {
                 VStack {
                     Text("Learn More")
@@ -65,7 +66,7 @@ struct LaunchView: View {
                 .cornerRadius(10)
             }
             Button(action: {
-                hasLaunchedBefore = true
+                versionNumber = store.appVersionNumber
             }) {
                 Text("I'll think about it.")
                     .font(.system(size: 18))
@@ -106,7 +107,7 @@ struct LaunchView: View {
         }
         .alert("Restore Succeeded", isPresented: $showSucceededAlert) {
             Button(role: .cancel, action: {
-                hasLaunchedBefore = true
+                versionNumber = store.appVersionNumber
             }) {
                 Text("OK")
             }

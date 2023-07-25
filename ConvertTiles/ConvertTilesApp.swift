@@ -12,7 +12,7 @@ struct ConvertTilesApp: App {
     @StateObject var store = Store()
     var body: some Scene {
         WindowGroup {
-            AppView()
+            TrialView()
                 .environmentObject(store)
                 .onAppear {
                     AdaptyManager.shared.activate()

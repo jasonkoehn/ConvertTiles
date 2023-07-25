@@ -23,9 +23,14 @@
 		8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBAF299DACD0000026A4 /* AddConverterView.swift */; };
 		8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB1299DACDE000026A4 /* EditConverterView.swift */; };
 		8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */; };
+		8784A4FD2A6EF09800AA75C0 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8784A4FC2A6EF09800AA75C0 /* KeychainManager.swift */; };
+		8784A5002A6EF0C800AA75C0 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 8784A4FF2A6EF0C800AA75C0 /* KeychainAccess */; };
+		8784A5022A6F080100AA75C0 /* FreeTrialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8784A5012A6F080100AA75C0 /* FreeTrialManager.swift */; };
+		8784A5042A6F37FB00AA75C0 /* TrialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8784A5032A6F37FB00AA75C0 /* TrialView.swift */; };
 		87DBB93B29BFD29A0071154E /* AdaptyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBB93A29BFD29A0071154E /* AdaptyManager.swift */; };
 		87DBB93D29BFD2B20071154E /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DBB93C29BFD2B20071154E /* PaywallView.swift */; };
 		87E1601F29B6B8BE00B8BEC7 /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = 87E1601E29B6B8BE00B8BEC7 /* Adapty */; };
+		87EF9A522A6B0F9E00804460 /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF9A512A6B0F9E00804460 /* UpdateView.swift */; };
 		87F256AC299E9A5900923713 /* TilePreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F256AB299E9A5900923713 /* TilePreView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +54,12 @@
 		8739EBAF299DACD0000026A4 /* AddConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConverterView.swift; sourceTree = "<group>"; };
 		8739EBB1299DACDE000026A4 /* EditConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditConverterView.swift; sourceTree = "<group>"; };
 		8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingGridView.swift; sourceTree = "<group>"; };
+		8784A4FC2A6EF09800AA75C0 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		8784A5012A6F080100AA75C0 /* FreeTrialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrialManager.swift; sourceTree = "<group>"; };
+		8784A5032A6F37FB00AA75C0 /* TrialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialView.swift; sourceTree = "<group>"; };
 		87DBB93A29BFD29A0071154E /* AdaptyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptyManager.swift; sourceTree = "<group>"; };
 		87DBB93C29BFD2B20071154E /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		87EF9A512A6B0F9E00804460 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
 		87F256AB299E9A5900923713 /* TilePreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilePreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +70,7 @@
 			files = (
 				87E1601F29B6B8BE00B8BEC7 /* Adapty in Frameworks */,
 				8720772629C5270B008E2F04 /* StoreKit.framework in Frameworks */,
+				8784A5002A6EF0C800AA75C0 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,8 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				8739EB94299D848A000026A4 /* ConvertTilesApp.swift */,
+				8784A5032A6F37FB00AA75C0 /* TrialView.swift */,
 				8739EBAB299DAC3C000026A4 /* AppView.swift */,
 				87213DF529C3A44E006128D4 /* LaunchView.swift */,
+				87EF9A512A6B0F9E00804460 /* UpdateView.swift */,
 				8739EBB5299DAD86000026A4 /* ScrollingGridView.swift */,
 				8739EBAD299DACC0000026A4 /* TileView.swift */,
 				8739EBAF299DACD0000026A4 /* AddConverterView.swift */,
@@ -108,6 +120,8 @@
 				8739EBA7299D8F2C000026A4 /* Structs&Funcs.swift */,
 				8720772229C4F19B008E2F04 /* Store.swift */,
 				87DBB93A29BFD29A0071154E /* AdaptyManager.swift */,
+				8784A5012A6F080100AA75C0 /* FreeTrialManager.swift */,
+				8784A4FC2A6EF09800AA75C0 /* KeychainManager.swift */,
 				8739EB98299D848B000026A4 /* Assets.xcassets */,
 				8739EBA3299D8D85000026A4 /* ReorderableForEach.swift */,
 				8739EBA5299D8DB2000026A4 /* StringToDimension.swift */,
@@ -145,6 +159,7 @@
 			name = ConvertTiles;
 			packageProductDependencies = (
 				87E1601E29B6B8BE00B8BEC7 /* Adapty */,
+				8784A4FF2A6EF0C800AA75C0 /* KeychainAccess */,
 			);
 			productName = ConvertTiles;
 			productReference = 8739EB91299D848A000026A4 /* ConvertTiles.app */;
@@ -176,6 +191,7 @@
 			mainGroup = 8739EB88299D848A000026A4;
 			packageReferences = (
 				87E1601D29B6B8BE00B8BEC7 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
+				8784A4FE2A6EF0C800AA75C0 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 8739EB92299D848A000026A4 /* Products */;
 			projectDirPath = "";
@@ -207,14 +223,18 @@
 				87213DF629C3A44E006128D4 /* LaunchView.swift in Sources */,
 				87DBB93B29BFD29A0071154E /* AdaptyManager.swift in Sources */,
 				8720772329C4F19B008E2F04 /* Store.swift in Sources */,
+				87EF9A522A6B0F9E00804460 /* UpdateView.swift in Sources */,
 				8739EBB2299DACDE000026A4 /* EditConverterView.swift in Sources */,
 				8739EBAE299DACC0000026A4 /* TileView.swift in Sources */,
 				8739EB95299D848A000026A4 /* ConvertTilesApp.swift in Sources */,
 				8739EBAC299DAC3C000026A4 /* AppView.swift in Sources */,
+				8784A5042A6F37FB00AA75C0 /* TrialView.swift in Sources */,
 				87F256AC299E9A5900923713 /* TilePreView.swift in Sources */,
 				87DBB93D29BFD2B20071154E /* PaywallView.swift in Sources */,
+				8784A5022A6F080100AA75C0 /* FreeTrialManager.swift in Sources */,
 				8739EBAA299D91FE000026A4 /* SettingsView.swift in Sources */,
 				8739EBB0299DACD0000026A4 /* AddConverterView.swift in Sources */,
+				8784A4FD2A6EF09800AA75C0 /* KeychainManager.swift in Sources */,
 				872B0D1E29AFBBD6003B3D8D /* AppIconSwift.swift in Sources */,
 				8739EBA6299D8DB2000026A4 /* StringToDimension.swift in Sources */,
 				8739EBB6299DAD86000026A4 /* ScrollingGridView.swift in Sources */,
@@ -454,6 +474,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8784A4FE2A6EF0C800AA75C0 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		87E1601D29B6B8BE00B8BEC7 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS.git";
@@ -465,6 +493,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8784A4FF2A6EF0C800AA75C0 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8784A4FE2A6EF0C800AA75C0 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		87E1601E29B6B8BE00B8BEC7 /* Adapty */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 87E1601D29B6B8BE00B8BEC7 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;

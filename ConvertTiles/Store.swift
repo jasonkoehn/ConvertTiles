@@ -9,6 +9,7 @@ import Foundation
 
 class Store: ObservableObject {
     @Published var converters: [Converter] = []
+    var appVersionNumber: String = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     
     init() {
         loadConverters()
