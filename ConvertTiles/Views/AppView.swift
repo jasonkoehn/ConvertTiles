@@ -13,6 +13,9 @@ struct AppView: View {
     @EnvironmentObject var store: Store
     @EnvironmentObject var subManager: SubscriptionManager
     @AppStorage("versionNumber") var versionNumber: String = "0"
+    // Old take out soon and use just version number
+    @AppStorage("hlb") var hasLaunchedBefore: Bool = false
+    //
     @AppStorage("ColorScheme") var colorScheme: String = "system"
     @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
     @State var showAddConverterView: Bool = false
@@ -76,10 +79,16 @@ struct AppView: View {
                         }
                     }
             } else{
-                if versionNumber != "0" && versionNumber != store.appVersionNumber {
+                // Old take out soon and use just version number
+                if hasLaunchedBefore {
                     UpdateView(versionNumber: $versionNumber, showPaywallView: $showPaywallView)
                 } else {
-                    LaunchView(versionNumber: $versionNumber, showPaywallView: $showPaywallView)
+                //
+                    if versionNumber != "0" && versionNumber != store.appVersionNumber {
+                        UpdateView(versionNumber: $versionNumber, showPaywallView: $showPaywallView)
+                    } else {
+                        LaunchView(versionNumber: $versionNumber, showPaywallView: $showPaywallView)
+                    }
                 }
             }
         }
