@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var subManager: SubscriptionManager
     @AppStorage("ColorScheme") var colorScheme: String = "system"
-    @AppStorage("pro") var pro: Bool = false
     @Environment var autoColorScheme: ColorScheme
     @Binding var haveAccentLines: Bool
     @Binding var accentColor: Color
@@ -25,9 +25,9 @@ struct SettingsView: View {
                         Text("Dark").tag("dark")
                     }
                     .pickerStyle(.segmented)
-                    .disabled(!pro)
-                    .opacity(pro ? 1.0 : 0.5)
-                    if !pro {
+                    .disabled(subManager.subStatus == .basic)
+                    .opacity(subManager.subStatus == .pro || subManager.subStatus == .trial ? 1.0 : 0.5)
+                    if subManager.subStatus == .basic {
                         Button(action: {
                             showPaywallView.toggle()
                         }) {
@@ -47,7 +47,7 @@ struct SettingsView: View {
                     Text("White").tag(Color.white)
                 }
                 .pickerStyle(.segmented)
-                if pro {
+                if subManager.subStatus == .pro || subManager.subStatus == .trial {
                     ColorPicker("Tile Accent Color:", selection: $accentColor)
                     Toggle(isOn: $haveAccentLines) {
                         Text("Tile Accent Lines?")
@@ -80,7 +80,7 @@ struct SettingsView: View {
             .onChange(of: accentColor) { _ in
                 UserDefaults.standard.set(encodeColor(color: accentColor), forKey: "accentColor")
             }
-            if !pro {
+            if subManager.subStatus != .pro {
                 Section("Upgrade") {
                     Button(action: {
                         showPaywallView.toggle()

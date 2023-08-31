@@ -11,8 +11,8 @@ struct AppView: View {
     @Environment(\.colorScheme) var autoColorScheme
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var store: Store
+    @EnvironmentObject var subManager: SubscriptionManager
     @AppStorage("versionNumber") var versionNumber: String = "0"
-    @AppStorage("pro") var pro: Bool = false
     @AppStorage("ColorScheme") var colorScheme: String = "system"
     @AppStorage("haveAccentLines") var haveAccentLines: Bool = true
     @State var showAddConverterView: Bool = false
@@ -46,7 +46,7 @@ struct AppView: View {
                                 }
                             }
                             Button(action: {
-                                if pro {
+                                if subManager.subStatus == .pro || subManager.subStatus == .trial {
                                     showAddConverterView.toggle()
                                 } else {
                                     if store.converters.count < 4 {
@@ -77,9 +77,9 @@ struct AppView: View {
                     }
             } else{
                 if versionNumber != "0" && versionNumber != store.appVersionNumber {
-                    UpdateView(versionNumber: $versionNumber)
+                    UpdateView(versionNumber: $versionNumber, showPaywallView: $showPaywallView)
                 } else {
-                    LaunchView(versionNumber: $versionNumber, pro: $pro, showPaywallView: $showPaywallView)
+                    LaunchView(versionNumber: $versionNumber, showPaywallView: $showPaywallView)
                 }
             }
         }
@@ -87,11 +87,5 @@ struct AppView: View {
         .onChange(of: store.converters) { _ in
             store.saveConverters()
         }
-    }
-}
-
-struct AppView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppView()
     }
 }

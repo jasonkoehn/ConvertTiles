@@ -8,7 +8,7 @@
 import Foundation
 import KeychainAccess
 
-final class KeychainManager {
+class KeychainManager {
     let keychain = Keychain(service: "com.jasonkoehn.ConvertTiles")
     
     func save(data: String, key: String) async {

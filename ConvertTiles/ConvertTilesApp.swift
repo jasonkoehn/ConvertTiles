@@ -10,18 +10,12 @@ import SwiftUI
 @main
 struct ConvertTilesApp: App {
     @StateObject var store = Store()
+    @StateObject var subscriptionManager = SubscriptionManager()
     var body: some Scene {
         WindowGroup {
-            TrialView()
+            AppView()
                 .environmentObject(store)
-                .onAppear {
-                    AdaptyManager.shared.activate()
-                }
+                .environmentObject(subscriptionManager)
         }
     }
 }
-
-
-// add update page
-// add free trial
-// redo paywall page
